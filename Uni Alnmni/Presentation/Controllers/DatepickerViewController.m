@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.footer_View setBackgroundColor:BLUE_HEADER];
     hint.text = self.hintSet;
     //self.picker.datePickerMode = UIDatePickerModeDate;
     [self.picker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];

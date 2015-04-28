@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Constants.h"
 @interface SocialNewsViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *tableRows;
+    __weak IBOutlet UIView *footer_view;
     NSMutableArray *addresses;
     __weak IBOutlet UITableView *socialTableview;
 }

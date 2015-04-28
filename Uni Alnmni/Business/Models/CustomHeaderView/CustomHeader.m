@@ -7,7 +7,7 @@
 //
 
 #import "CustomHeader.h"
-
+#import "Constants.h"
 @implementation CustomHeader
 
 /*
@@ -48,8 +48,8 @@
         
         //self.navigationBar.opaque = YES;
         //self.navigationBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Sign-in-Large---Default"]];
-        self.navigationBar.backgroundColor = [UIColor colorWithRed:24/255.0 green:128/255.0 blue:181/255.0 alpha:1];
-        [self.navigationBar setBarTintColor:[UIColor colorWithRed:24/255.0 green:128/255.0 blue:181/255.0 alpha:1]];
+        self.navigationBar.backgroundColor = BLUE_HEADER;
+        [self.navigationBar setBarTintColor:BLUE_HEADER];
         self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
         //[self addNavigationBarButton];
     }

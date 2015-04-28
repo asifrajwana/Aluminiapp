@@ -8,7 +8,7 @@
 
 #import "searchDataSetViewController.h"
 #import "AlumniSearchViewController.h"
-
+#import "Constants.h"
 @interface searchDataSetViewController ()
 
 @end
@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     hint.text = hintSet;
+    [self.footer_View setBackgroundColor:BLUE_HEADER];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];

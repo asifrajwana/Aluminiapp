@@ -18,6 +18,7 @@
 NSInteger row;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [footer_view setBackgroundColor:BLUE_HEADER];
     socialTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if (self.is_map_list) {
         self.navigationItem.leftBarButtonItem = nil;

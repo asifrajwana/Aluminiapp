@@ -9,7 +9,7 @@
 #import "HomeController.h"
 #import "AllWebView.h"
 #import <CoreLocation/CoreLocation.h>
-
+#import "Constants.h"
 @implementation HomeController
 
 HomeScreenCustomCellTableViewCell *cell;
@@ -23,7 +23,7 @@ BOOL isAlumni;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     isAlumni = [[defaults objectForKey:@"isAlumni"] boolValue];
-    
+    [tell_your_friend_button setBackgroundColor:BLUE_LIGHT_Color];
     NSLog(isAlumni ? @"Yes" : @"No");
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];

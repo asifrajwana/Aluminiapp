@@ -21,6 +21,7 @@
     OAConsumer *consumer;
 }
 @property (weak, nonatomic) IBOutlet MACachedImageView *userpic;
+@property (weak, nonatomic) IBOutlet UIButton *logout_button;
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userEmail;

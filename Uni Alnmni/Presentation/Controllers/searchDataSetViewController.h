@@ -13,6 +13,7 @@
 }
 @property (strong) NSString *hintSet;
 @property (weak, nonatomic) IBOutlet UILabel *hint;
+@property (weak, nonatomic) IBOutlet UIView *footer_View;
 @property (weak, nonatomic) IBOutlet UITextField *enter_field_data;
 
 

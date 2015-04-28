@@ -32,6 +32,7 @@ NSArray *ListData;
 int selectedIndex;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [footer_View setBackgroundColor:BLUE_HEADER];
     ListData = @[@"Name",@"Industry",@"Company",@"Degree",@"Start Year",@"End Year",@"Field of Study",@"School Name",@"Location"];
     // Do any additional setup after loading the view.
 }
