@@ -1,0 +1,52 @@
+PODS:
+  - AFNetworking (2.5.3):
+    - AFNetworking/NSURLConnection (= 2.5.3)
+    - AFNetworking/NSURLSession (= 2.5.3)
+    - AFNetworking/Reachability (= 2.5.3)
+    - AFNetworking/Security (= 2.5.3)
+    - AFNetworking/Serialization (= 2.5.3)
+    - AFNetworking/UIKit (= 2.5.3)
+  - AFNetworking/NSURLConnection (2.5.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.3)
+  - AFNetworking/Security (2.5.3)
+  - AFNetworking/Serialization (2.5.3)
+  - AFNetworking/UIKit (2.5.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Bolts (1.1.4)
+  - MACachedImageView (1.1.4):
+    - AFNetworking (~> 2.2)
+    - MACircleProgressIndicator (~> 1.0.0)
+  - MACircleProgressIndicator (1.0.0)
+  - Parse (1.7.1):
+    - Bolts (~> 1.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5)
+  - MACachedImageView (from `https://github.com/mattycas/MACachedImageView.git`)
+  - Parse (~> 1.7)
+
+EXTERNAL SOURCES:
+  MACachedImageView:
+    :git: https://github.com/mattycas/MACachedImageView.git
+
+CHECKOUT OPTIONS:
+  MACachedImageView:
+    :commit: 3ca8c8b113b3bebf1e9e6329d4f8b67810a742b1
+    :git: https://github.com/mattycas/MACachedImageView.git
+
+SPEC CHECKSUMS:
+  AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
+  Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
+  MACachedImageView: 5a3219b4786ab19c96ead66e2aafd13d15c6e619
+  MACircleProgressIndicator: d209ad7e8533797a385f1812e653afb93806ff29
+  Parse: fa8ec29de6d82035635986c11946299fb1b38316
+
+COCOAPODS: 0.36.1
