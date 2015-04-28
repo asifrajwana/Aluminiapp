@@ -95,6 +95,7 @@ NSInteger row;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     row = indexPath.row;
+    self.row = indexPath.row;
     // if (indexPath.row >=0) {*/
     if (!self.is_map_list) {
         [self performSegueWithIdentifier:@"SOCIAL_NEWS_SEGUE" sender:self];

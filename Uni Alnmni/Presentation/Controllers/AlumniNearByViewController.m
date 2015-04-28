@@ -575,7 +575,7 @@ MKCoordinateRegion region;
     
     [self.searchDisplayController setActive:NO animated:YES];
     MKMapItem *firstItem = self.places[indexPath.row];
-    //[self setAndAddAnnotation:firstItem];
+    [self setAndAddAnnotation:firstItem.placemark.location.coordinate];
     self.mapitem = firstItem;
     self.location = self.mapitem.placemark.location;
     
@@ -708,7 +708,15 @@ MKCoordinateRegion region;
 }
 
 - (IBAction)unwindToAlumniNearByController:(UIStoryboardSegue *)unwindSegue{
-
+    if ([unwindSegue.sourceViewController isKindOfClass:[SocialNewsViewController class]]) {
+        SocialNewsViewController *vc = unwindSegue.sourceViewController;
+        if (vc.row !=nil) {
+            PFObject *obj = [self.PFObjectList objectAtIndex:vc.row];
+            PFGeoPoint *objGeoPoint = obj[@"coordinates"];
+            
+            [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude)];
+        }
+    }
 }
 
 /*

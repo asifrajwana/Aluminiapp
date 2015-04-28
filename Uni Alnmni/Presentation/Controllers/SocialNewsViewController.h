@@ -18,5 +18,6 @@
 
 @property bool is_map_list;
 @property (strong, nonatomic) NSArray *mapUserList;
+@property int row;
 
 @end
