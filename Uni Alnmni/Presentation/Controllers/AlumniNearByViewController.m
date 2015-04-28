@@ -702,7 +702,12 @@ MKCoordinateRegion region;
         
         // Pass any objects to the view controller here, like...
         vc.is_map_list = YES;
+        vc.mapUserList = self.PFObjectList;
     }
+
+}
+
+- (IBAction)unwindToAlumniNearByController:(UIStoryboardSegue *)unwindSegue{
 
 }
 

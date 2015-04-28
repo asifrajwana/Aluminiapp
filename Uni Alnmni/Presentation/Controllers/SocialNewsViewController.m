@@ -8,6 +8,8 @@
 
 #import "SocialNewsViewController.h"
 #import "AllWebView.h"
+#import <Parse/Parse.h>
+#import "AlumniSearchCustomCellTableViewCell.h"
 
 @interface SocialNewsViewController ()
 
@@ -21,7 +23,7 @@ NSInteger row;
     socialTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if (self.is_map_list) {
         self.navigationItem.leftBarButtonItem = nil;
-        [self.navigationItem.backBarButtonItem setTintColor:[UIColor whiteColor]];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }else {
     tableRows = [[NSMutableArray alloc] initWithObjects:@"Twitter",@"Facebook",@"Events",@"LinkedInGroup", nil];
     addresses = [[NSMutableArray alloc] initWithObjects:
@@ -43,21 +45,49 @@ NSInteger row;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return tableRows.count;
+    
+    if (self.is_map_list) {
+        return self.mapUserList.count;
+    }else {
+        return tableRows.count;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *cellIdentifier = @"cellID";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    if (self.is_map_list) {
+        
+        static NSString *cellForIdentifier = @"CellForSearch";
+        AlumniSearchCustomCellTableViewCell *cell = (AlumniSearchCustomCellTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellForIdentifier];
+        if (cell == nil) {
+            cell = [[AlumniSearchCustomCellTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellForIdentifier];
+        }
+        //cell.cellCatagoryText.text = ListData[indexPath.row];
+        
+        PFObject *obj = [self.mapUserList objectAtIndex:indexPath.row];
+        NSString *first_name = obj[@"firstName"];
+        NSString *last_name = obj[@"lastName"];
+        PFGeoPoint *objGeoPoint = obj[@"coordinates"];
+        NSString *name= [first_name stringByAppendingString:last_name];
+        NSString *location= [NSString stringWithFormat:@"%f %f",objGeoPoint.latitude,objGeoPoint.longitude];
+        cell.cellCatagoryText.text = name;
+        cell.cellSelectedText.text = location;
+        cell.cellImage = nil;
+        return cell;
+    }else {
+        static NSString *cellIdentifier = @"cellID";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+
+        [cell.textLabel setText:[tableRows objectAtIndex:indexPath.row]];
+        cell.textLabel.textAlignment= NSTextAlignmentCenter;
+        return cell;
     }
-    [cell.textLabel setText:[tableRows objectAtIndex:indexPath.row]];
-    cell.textLabel.textAlignment= NSTextAlignmentCenter;
-    return cell;
+    
 }
 
 
@@ -65,7 +95,10 @@ NSInteger row;
 {
     row = indexPath.row;
     // if (indexPath.row >=0) {*/
-    [self performSegueWithIdentifier:@"SOCIAL_NEWS_SEGUE" sender:self];
+    if (!self.is_map_list) {
+        [self performSegueWithIdentifier:@"SOCIAL_NEWS_SEGUE" sender:self];
+    }
+    
     //}
 }
 
@@ -79,6 +112,9 @@ NSInteger row;
         // Pass any objects to the view controller here, like...
         vc.fullUrl = [addresses objectAtIndex:row];
         vc.tittle = [tableRows objectAtIndex:row];
+    }
+    if ([segue.identifier isEqualToString:@"UNWIND_NEARBY_SEGUE"] ) {
+        
     }
 }
 

@@ -408,6 +408,58 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cellID" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sJx-mF-kaS">
                                 <rect key="frame" x="0.0" y="64" width="600" height="476"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CellForSearch" rowHeight="59" id="OGz-IZ-zqp" customClass="AlumniSearchCustomCellTableViewCell">
+                                        <rect key="frame" x="10" y="74" width="600" height="59"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OGz-IZ-zqp" id="CeO-wr-ciz">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="linkedin_attribution" translatesAutoresizingMaskIntoConstraints="NO" id="Vjb-bg-crg">
+                                                    <rect key="frame" x="8" y="9" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="mjb-N4-EJq"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCx-uI-Pov">
+                                                    <rect key="frame" x="41" y="8" width="518" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="any" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsI-h8-cTb">
+                                                    <rect key="frame" x="41" y="37" width="518" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="y5x-eB-yLR"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FsI-h8-cTb" firstAttribute="top" secondItem="WCx-uI-Pov" secondAttribute="bottom" constant="8" id="21N-Ue-e3t"/>
+                                                <constraint firstItem="WCx-uI-Pov" firstAttribute="leading" secondItem="Vjb-bg-crg" secondAttribute="trailing" constant="8" id="IMB-sR-9GE"/>
+                                                <constraint firstItem="WCx-uI-Pov" firstAttribute="leading" secondItem="Vjb-bg-crg" secondAttribute="trailing" constant="8" id="Joh-02-Nxr"/>
+                                                <constraint firstItem="Vjb-bg-crg" firstAttribute="top" secondItem="CeO-wr-ciz" secondAttribute="topMargin" constant="1" id="Kzx-yv-xoH"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Vjb-bg-crg" secondAttribute="bottom" constant="16" id="V6R-8P-7x7"/>
+                                                <constraint firstItem="WCx-uI-Pov" firstAttribute="top" secondItem="CeO-wr-ciz" secondAttribute="topMargin" id="Wiu-qQ-lnU"/>
+                                                <constraint firstItem="FsI-h8-cTb" firstAttribute="trailing" secondItem="CeO-wr-ciz" secondAttribute="trailingMargin" id="Ysq-yV-e8d"/>
+                                                <constraint firstItem="WCx-uI-Pov" firstAttribute="trailing" secondItem="CeO-wr-ciz" secondAttribute="trailingMargin" id="b5Y-cl-eqF"/>
+                                                <constraint firstItem="Vjb-bg-crg" firstAttribute="leading" secondItem="CeO-wr-ciz" secondAttribute="leadingMargin" id="d1L-zR-VQH"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="FsI-h8-cTb" secondAttribute="bottom" constant="-8" id="ftm-lk-aTS"/>
+                                                <constraint firstItem="FsI-h8-cTb" firstAttribute="leading" secondItem="CeO-wr-ciz" secondAttribute="leadingMargin" constant="33" id="gf8-7e-Zk8"/>
+                                                <constraint firstItem="FsI-h8-cTb" firstAttribute="top" secondItem="WCx-uI-Pov" secondAttribute="bottom" constant="8" id="hbO-vx-wcn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellCatagoryText" destination="WCx-uI-Pov" id="ZiJ-K9-ttr"/>
+                                            <outlet property="cellImage" destination="Vjb-bg-crg" id="ly8-Dw-r01"/>
+                                            <outlet property="cellSelectedText" destination="FsI-h8-cTb" id="Qz4-YR-RpI"/>
+                                            <segue destination="vdG-v4-KwK" kind="unwind" identifier="UNWIND_NEARBY_SEGUE" unwindAction="unwindToAlumniNearByController:" id="rse-HM-cTC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="58S-XI-YXO" id="ifZ-co-5dW"/>
                                     <outlet property="delegate" destination="58S-XI-YXO" id="Zl7-Hu-lv1"/>
@@ -978,8 +1030,8 @@
         <image name="linkedin_attribution" width="19" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VBh-0T-Qxz"/>
-        <segue reference="Ttn-J9-xHo"/>
+        <segue reference="G2E-fc-QNP"/>
+        <segue reference="o3T-C1-q09"/>
         <segue reference="wh3-m7-89m"/>
     </inferredMetricsTieBreakers>
 </document>
