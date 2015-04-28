@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vC3-bZ-5ST">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vC3-bZ-5ST">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -209,6 +209,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="footer_View" destination="zNf-M5-8lE" id="eIt-0d-kon"/>
                         <outlet property="tableview" destination="o5j-d4-470" id="AYj-dB-Qa7"/>
                         <segue destination="3TP-fY-SrJ" kind="push" identifier="SEARCH_DATA_TEXT_SEGUE" id="Kg2-WR-ikA"/>
                         <segue destination="rLL-V0-BKu" kind="push" identifier="SEARCH_DATA_DATE_SEGUE" id="rqy-jy-BTa"/>
@@ -285,6 +286,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="enter_field_data" destination="jLM-UX-xkx" id="oZQ-OH-obD"/>
+                        <outlet property="footer_View" destination="khI-Dr-WTF" id="kX4-Zm-TPc"/>
                         <outlet property="hint" destination="lWc-Dh-e8p" id="9Jc-7i-TFJ"/>
                     </connections>
                 </viewController>
@@ -364,6 +366,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="footer_View" destination="oO3-gI-cAh" id="DHt-cx-ieT"/>
                         <outlet property="hint" destination="Tpi-Dl-GD7" id="a9F-UN-YUS"/>
                         <outlet property="picker" destination="OQG-cw-woe" id="rlZ-2Y-7T1"/>
                     </connections>
@@ -487,6 +490,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="footer_view" destination="tUx-m0-krn" id="bKX-tU-6o1"/>
                         <outlet property="socialTableview" destination="sJx-mF-kaS" id="YK8-n2-1C7"/>
                         <segue destination="QQW-k5-9oH" kind="show" identifier="SOCIAL_NEWS_SEGUE" id="wh3-m7-89m"/>
                     </connections>
@@ -635,6 +639,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logout_button" destination="th1-QZ-XKc" id="FgJ-Yn-dqU"/>
                         <outlet property="userAddress" destination="276-V9-Zlu" id="IhQ-wx-ztd"/>
                         <outlet property="userEmail" destination="UF9-Ww-s2f" id="ylx-CZ-WFZ"/>
                         <outlet property="userName" destination="mAT-ai-4vu" id="DWj-T5-AqN"/>
@@ -801,6 +806,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableview" destination="9Aq-FN-ZHH" id="gDq-pf-gFh"/>
+                        <outlet property="tell_your_friend_button" destination="Zsp-o5-muD" id="r9V-FP-9n0"/>
                         <segue destination="Jx1-rc-CoT" kind="show" identifier="MAP_DETAILS_SEGUE" id="G2E-fc-QNP"/>
                         <segue destination="Ui2-h8-ME2" kind="push" identifier="SEARCH_FILTER_SEGUE" id="dR2-V3-XiU"/>
                         <segue destination="58S-XI-YXO" kind="push" identifier="SOCIAL_NEWS_SEGUE" id="o3T-C1-q09"/>
@@ -905,6 +911,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomView" destination="Xhc-C1-F6e" id="8ih-k7-4eV"/>
+                        <outlet property="footer_view" destination="Xhc-C1-F6e" id="2ti-e9-DrP"/>
                         <outlet property="mapViewAlumni" destination="VWa-jH-1Bc" id="VGy-tl-PE5"/>
                         <outlet property="searchBar" destination="CvC-tb-N4l" id="NX9-6d-abn"/>
                         <outlet property="searchDisplayController" destination="rRd-Rr-js6" id="ItI-5F-YOa"/>
@@ -1030,8 +1037,14 @@
         <image name="linkedin_attribution" width="19" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
+<<<<<<< HEAD
         <segue reference="G2E-fc-QNP"/>
         <segue reference="o3T-C1-q09"/>
         <segue reference="wh3-m7-89m"/>
+=======
+        <segue reference="l6h-M7-OG0"/>
+        <segue reference="o3T-C1-q09"/>
+        <segue reference="G2E-fc-QNP"/>
+>>>>>>> FETCH_HEAD
     </inferredMetricsTieBreakers>
 </document>

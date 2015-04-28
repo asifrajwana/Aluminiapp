@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "AlumniSearchCustomCellTableViewCell.h"
-
+#import "Constants.h"
 @interface AlumniSearchViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
 __weak IBOutlet UITableView *tableview;
+    __weak IBOutlet UIView *footer_View;
 }
 
 @property (strong, nonatomic) AlumniSearchCustomCellTableViewCell *cellSelected;

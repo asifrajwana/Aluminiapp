@@ -14,6 +14,7 @@
     NSArray *homeList;
     __weak IBOutlet UITableView *tableview;
     
+    __weak IBOutlet UIButton *tell_your_friend_button;
 }
 
 

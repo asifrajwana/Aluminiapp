@@ -9,7 +9,7 @@
 #import "UserProfileViewController.h"
 #import <Parse/Parse.h>
 #import "ViewController.h"
-
+#import "Constants.h"
 @interface UserProfileViewController ()
 
 @end
@@ -65,6 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self set_data];
+    [self.logout_button setBackgroundColor:BLUE_HEADER];
     
 }
 

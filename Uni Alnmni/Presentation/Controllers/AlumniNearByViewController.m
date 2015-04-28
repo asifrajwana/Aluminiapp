@@ -37,7 +37,7 @@ MKCoordinateRegion region;
     self.geocoder = [[CLGeocoder alloc] init];
     [self getUserCurrentLocation];
     [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor grayColor]];
-    
+    [self.footer_view setBackgroundColor:BLUE_HEADER];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor blackColor]];
     
     [self.searchDisplayController setDelegate:self];

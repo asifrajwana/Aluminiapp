@@ -7,12 +7,13 @@
 //
 
 #import "AlumniSearchCustomCellTableViewCell.h"
-
+#import "Constants.h"
 @implementation AlumniSearchCustomCellTableViewCell
 
 @synthesize cellImage,cellCatagoryText,cellSelectedText;
 
 - (void)awakeFromNib {
+    cellCatagoryText.textColor=BLUE_LIGHT_Color;
     // Initialization code
 }
 

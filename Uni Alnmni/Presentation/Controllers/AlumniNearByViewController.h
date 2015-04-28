@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "SocialNewsViewController.h"
-
+#import "Constants.h"
 @interface AlumniNearByViewController : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>{
 
     
@@ -30,6 +30,7 @@
 @property bool is_login_segue;
 @property (strong, nonatomic) MKMapItem *mapitem;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIView *footer_view;
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapViewAlumni;

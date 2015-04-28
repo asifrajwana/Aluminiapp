@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Constants.h"
 @interface DatepickerViewController : UIViewController{
     
 }
 @property (strong) NSString *hintSet;
 
 @property (strong, nonatomic) IBOutlet UILabel *hint;
+@property (weak, nonatomic) IBOutlet UIView *footer_View;
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *picker;
 @end
