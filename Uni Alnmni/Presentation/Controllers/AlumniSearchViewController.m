@@ -33,13 +33,19 @@ int selectedIndex;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [footer_View setBackgroundColor:BLUE_HEADER];
-    ListData = @[@"Name",@"Industry",@"Company",@"Degree",@"Start Year",@"End Year",@"Field of Study",@"School Name",@"Location"];
+    ListData = @[@"Name",@"Industry",@"Company",@"Degree",@"School Name",@"Year", @"Location"];
+    self.selectedData = [[NSMutableArray alloc] initWithObjects:@"",@"all",@"all",@"all",@"all",@"", @"all", nil];
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return  roundf( ([[UIScreen mainScreen] bounds].size.height - 123.0f )/ [ListData count]) ;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -57,8 +63,10 @@ int selectedIndex;
         cell = [[AlumniSearchCustomCellTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellForIdentifier];
     }
     cell.cellCatagoryText.text = ListData[indexPath.row];
-    if(indexPath.row == 1 || indexPath.row ==2 || indexPath.row ==8){
+    cell.cellSelectedText.text = self.selectedData[indexPath.row];
     
+    if(indexPath.row == 1 || indexPath.row ==2 || indexPath.row ==6){
+        
     }else{
         cell.cellImage.image = nil;
         cell.cellCatagoryText.textColor = [UIColor blackColor];
@@ -68,19 +76,15 @@ int selectedIndex;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     self.cellSelected  = (AlumniSearchCustomCellTableViewCell *)[tableview cellForRowAtIndexPath:indexPath];
-//    if (indexPath.row == 0) {
-//        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Enter the Name" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-//        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-//        [alert show];
-//    }
     
-    selectedIndex = indexPath.row;
+    selectedIndex = (int)indexPath.row;
     
-    if (indexPath.row == 4 || indexPath.row == 5) {
+    if (indexPath.row == 5) {
         [self performSegueWithIdentifier:@"SEARCH_DATA_DATE_SEGUE" sender:self];
-    }else if(indexPath.row == 8){
+    }else if(indexPath.row == 6){
         [self performSegueWithIdentifier:@"SEARCH_LOCATION_SEGUE" sender:self];
     }else {
         [self performSegueWithIdentifier:@"SEARCH_DATA_TEXT_SEGUE" sender:self];
@@ -105,68 +109,53 @@ int selectedIndex;
 
 - (IBAction)unwindToAlumniSearchController:(UIStoryboardSegue *)unwindSegue
 {
-    
     if ([unwindSegue.sourceViewController isKindOfClass:[searchDataSetViewController class]]) {
         searchDataSetViewController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
         if (![SDSViewConroller.hintSet isEqualToString:@""]) {
             self.cellSelected.cellSelectedText.text = SDSViewConroller.hintSet;
-            if (selectedIndex == 0) {
-                self.Name = SDSViewConroller.hintSet;
-                NSLog(@"%@",self.Name);
-            }else if (selectedIndex == 1) {
-                self.Industry = SDSViewConroller.hintSet;
-                NSLog(@"%@",self.Industry);
-            }else if (selectedIndex == 2) {
-                self.Company = SDSViewConroller.hintSet;
-                NSLog(@"%@",self.Company);
-            }else if (selectedIndex == 3) {
-                self.Degree = SDSViewConroller.hintSet;
-                NSLog(@"%@",self.Degree);
-            }else if (selectedIndex == 6) {
-                self.Field_of_Study = SDSViewConroller.hintSet;
-                NSLog(@"%@",self.Field_of_Study);
-            }else if (selectedIndex == 7) {
-                self.School_Name = SDSViewConroller.hintSet;
-                NSLog(@"%@",self.Field_of_Study);
-            }
+            
+            [self.selectedData replaceObjectAtIndex:selectedIndex withObject:SDSViewConroller.hintSet];
         }
-    }else if ([unwindSegue.sourceViewController isKindOfClass:[DatepickerViewController class]]) {
+    }
+    else if ([unwindSegue.sourceViewController isKindOfClass:[DatepickerViewController class]])
+    {
         DatepickerViewController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
         if (![SDSViewConroller.hintSet isEqualToString:@""]) {
             self.cellSelected.cellSelectedText.text = SDSViewConroller.hintSet;
-            if (selectedIndex == 4) {
-                self.Start_Year = SDSViewConroller.hintSet;
-                NSLog(@"%@",self.Start_Year);
-            }else if (selectedIndex == 5) {
-                self.End_Year = SDSViewConroller.hintSet;
-                NSLog(@"%@",self.End_Year);
-            }
+            [self.selectedData replaceObjectAtIndex:selectedIndex withObject:SDSViewConroller.hintSet];
         }
     }else if ([unwindSegue.sourceViewController isKindOfClass:[MyTableViewController class]]) {
         MyTableViewController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
         if (![SDSViewConroller.name isEqualToString:@""]) {
             self.cellSelected.cellSelectedText.text = SDSViewConroller.name;
-            if (selectedIndex == 8) {
-                self.Location = SDSViewConroller.name;
-                NSLog(@"%@",self.Location);
-            }
+            [self.selectedData replaceObjectAtIndex:selectedIndex withObject:SDSViewConroller.name];
         }
         NSLog(@"helloo.....");
     }
     
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)searchAluminiByGivenFilters:(id)sender {
+    
+    NSLog(@"Selected Data Filters = %@", self.selectedData);
+    
+    for (NSUInteger st=0; st<[self.selectedData count]; st++) {
+        
+        if ([[self.selectedData objectAtIndex:st] isEqualToString:@"all"])
+        {
+            [self.selectedData replaceObjectAtIndex:st withObject:@""];
+        }
+    }
+    
+    [AluminiDataSearch loadAluminiDataForFilters:self.selectedData andCompletionBlock:^(NSArray *objects, NSError *error) {
+        
+        NSLog(@"Objects = %@", objects);
+        
+    }];
+
 }
-*/
-
 @end

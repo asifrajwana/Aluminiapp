@@ -35,42 +35,7 @@ UIAlertView *alertToEnableDeviceLocation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    /*
-    PFQuery *queryForUser = [PFQuery queryWithClassName:@"LinkedInUser"];
-    [queryForUser whereKey:@"email" equalTo:@"hrg8187@gmail.com"];
-    
-    [queryForUser getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        
-        if (object)
-        {
-            PFObject *educationPFObject = [PFObject objectWithClassName:@"Education"];
-            educationPFObject[@"degree"] = @"SSC";
-            [educationPFObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                
-                if (succeeded)
-                {
-                    PFRelation *relation = [object relationForKey:@"userEducation"];
-                    [relation addObject:educationPFObject];
-                    [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                        if (succeeded) {
-                            NSLog(@"User degree");
-                        }
-                    }];
-                }
-                else if (error)
-                {
-                    NSLog(@"Error = %@", error);
-                }
-            }];
-        }
-        else if (error)
-        {
-            
-        }
-    }];
-     */
-        
-    
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
@@ -321,8 +286,6 @@ UIAlertView *alertToEnableDeviceLocation;
         newLinkedInUser[@"address"] = user.address = address;
     }
     
-    
-    
     newLinkedInUser[@"isAlumni"] = [NSNumber numberWithBool:NO];
     user.isAlumni = NO;
     
@@ -358,8 +321,12 @@ UIAlertView *alertToEnableDeviceLocation;
     
     [newLinkedInUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            
-            //[self performSegueWithIdentifier:@"Homescreen" sender:self];
+            if ([[dataOfLinkedInUser objectForKey:@"educations"] objectForKey:@"_total"] > 0) {
+                
+                [self saveEducationsForThisUser:newLinkedInUser andEducations:[dataOfLinkedInUser objectForKey:@"educations"]];
+                
+                //[self performSegueWithIdentifier:@"Homescreen" sender:self];
+            }
                     }
         else if (error)
         {
@@ -371,6 +338,42 @@ UIAlertView *alertToEnableDeviceLocation;
         [self first_Alumni_Hit];
     }
 }
+
+- (void) saveEducationsForThisUser : (PFObject *) linkedUser andEducations : (NSDictionary *) educations
+{
+    NSArray *allEducations = [educations objectForKey:@"values"];
+    
+    for (NSDictionary *edu in allEducations)
+    {
+        PFObject *educationPFObject = [PFObject objectWithClassName:@"Education"];
+        
+        educationPFObject[@"degree"] = [edu objectForKey:@"degree"];
+        educationPFObject[@"schoolName"] = [edu objectForKey:@"schoolName"];
+        educationPFObject[@"endDate"] = [NSString stringWithFormat:@"%@", [[edu objectForKey:@"endDate"] objectForKey:@"year"]];
+        educationPFObject[@"startDate"] = [NSString stringWithFormat:@"%@", [[edu objectForKey:@"startDate"] objectForKey:@"year"]];
+        
+        [educationPFObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            
+            if (succeeded)
+            {
+                PFRelation *relation = [linkedUser relationForKey:@"userEducation"];
+                [relation addObject:educationPFObject];
+                [linkedUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        NSLog(@"User degree Saved");
+                    }
+                }];
+            }
+            else if (error)
+            {
+                NSLog(@"Error = %@", error);
+            }
+        }];
+        
+    }
+    
+}
+
 
 #pragma mark pragma getting user current location
 
