@@ -14,14 +14,15 @@
 
 @implementation DatepickerViewController
 
-@synthesize hint,picker,hintSet;
+@synthesize hint,picker,starthintSet,endhintSet;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.footer_View setBackgroundColor:BLUE_HEADER];
-    hint.text = self.hintSet;
+    //hint.text = self.starthintSet;
     //self.picker.datePickerMode = UIDatePickerModeDate;
     [self.picker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.endPicker addTarget:self action:@selector(enddatePickerChanged:) forControlEvents:UIControlEventValueChanged];
     [self setDateFromPicker:self.picker];
     // Do any additional setup after loading the view.
 }
@@ -31,12 +32,25 @@
     [self setDateFromPicker:datePicker];
 }
 
+- (void)enddatePickerChanged:(UIDatePicker *)datePicker
+{
+    [self setEndDateFromPicker:datePicker];
+}
+
 -(void) setDateFromPicker : (UIDatePicker *) datePicker
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy"];
     NSString *strDate = [dateFormatter stringFromDate:datePicker.date];
-    hintSet = strDate;
+    starthintSet = strDate;
+}
+
+-(void) setEndDateFromPicker : (UIDatePicker *) datePicker
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy"];
+    NSString *strDate = [dateFormatter stringFromDate:datePicker.date];
+    endhintSet = strDate;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +60,7 @@
 - (IBAction)done:(id)sender {
 }
 - (IBAction)cancel:(id)sender {
-    hintSet = @"";
+    starthintSet = @"";
 }
 
 /*

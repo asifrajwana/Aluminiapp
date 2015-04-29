@@ -70,7 +70,7 @@
                 {
                     if (i==5)
                     {
-                        NSArray *dates = [[filters objectAtIndex:i] componentsSeparatedByString:@" "];
+                        NSArray *dates = [[filters objectAtIndex:i] componentsSeparatedByString:@"-"];
                         
                         if ([dates objectAtIndex:0]) {
                             PFQuery *innerQuery = [PFQuery queryWithClassName:@"Education"];

@@ -15,7 +15,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "User.h"
 #import <Parse/Parse.h>
-
+#import "Constants.h"
 @interface ViewController : UIViewController<CLLocationManagerDelegate,UIAlertViewDelegate>
 {
     User *user;
@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loader;
     @property (nonatomic, retain) OAuthLoginView *oAuthLoginView;
 
+@property (weak, nonatomic) IBOutlet UIView *footer_view;
 @property (nonatomic, retain) CLLocationManager *userLocationManager;
 @property (nonatomic, retain) CLLocation *location;
 

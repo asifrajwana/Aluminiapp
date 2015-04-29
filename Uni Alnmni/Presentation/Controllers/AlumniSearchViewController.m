@@ -65,7 +65,7 @@ int selectedIndex;
     }
     cell.cellCatagoryText.text = ListData[indexPath.row];
     cell.cellSelectedText.text = self.selectedData[indexPath.row];
-    
+    cell.cellCatagoryText.textColor=BLUE_LIGHT_Color;
     if(indexPath.row == 1 || indexPath.row ==2 || indexPath.row ==6){
         
     }else{
@@ -97,11 +97,11 @@ int selectedIndex;
         searchDataSetViewController *vc = [segue destinationViewController];
         
         // Pass any objects to the view controller here, like...
-        vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
+        //vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
     }else if ([segue.identifier isEqualToString:@"SEARCH_DATA_DATE_SEGUE"]){
         
         DatepickerViewController *vc = [segue destinationViewController];
-        vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
+//        //vc.starthintSet = ListData[tableview.indexPathForSelectedRow.item];
     }else if ([segue.identifier isEqualToString:@"SEARCH_MAP_SEGUE"]){
         
         AlumniNearByViewController *vc = [segue destinationViewController];
@@ -129,9 +129,14 @@ int selectedIndex;
     {
         DatepickerViewController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
-        if (![SDSViewConroller.hintSet isEqualToString:@""]) {
-            self.cellSelected.cellSelectedText.text = SDSViewConroller.hintSet;
-            [self.selectedData replaceObjectAtIndex:selectedIndex withObject:SDSViewConroller.hintSet];
+        if (![SDSViewConroller.starthintSet isEqualToString:@""]) {
+            NSString *dates = [SDSViewConroller.starthintSet stringByAppendingString:@"-"];
+            dates = [dates stringByAppendingString:SDSViewConroller.endhintSet];
+            
+            self.cellSelected.cellSelectedText.text = dates;
+            
+            [self.selectedData replaceObjectAtIndex:selectedIndex withObject:dates];
+            
         }
     }else if ([unwindSegue.sourceViewController isKindOfClass:[MyTableViewController class]]) {
         MyTableViewController *SDSViewConroller = unwindSegue.sourceViewController;

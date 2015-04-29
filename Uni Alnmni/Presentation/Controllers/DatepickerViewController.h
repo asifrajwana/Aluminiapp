@@ -11,10 +11,13 @@
 @interface DatepickerViewController : UIViewController{
     
 }
-@property (strong) NSString *hintSet;
+@property (strong) NSString *starthintSet;
+@property (strong) NSString *endhintSet;
 
 @property (strong, nonatomic) IBOutlet UILabel *hint;
 @property (weak, nonatomic) IBOutlet UIView *footer_View;
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *picker;
+@property (weak, nonatomic) IBOutlet UILabel *endhint;
+@property (weak, nonatomic) IBOutlet UIDatePicker *endPicker;
 @end

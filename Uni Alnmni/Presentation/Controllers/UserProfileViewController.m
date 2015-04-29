@@ -47,6 +47,7 @@
         
     }if([arr objectAtIndex:2] !=nil){
         userEmail.text = [arr objectAtIndex:2];
+        userEmail.textColor=BLUE_LIGHT_Color;
         
     }if([arr objectAtIndex:3] !=nil){
         NSString *address = [[NSString alloc] initWithFormat:@"Address: %@",[arr objectAtIndex:3]];
@@ -66,6 +67,7 @@
     [super viewDidLoad];
     [self set_data];
     [self.logout_button setBackgroundColor:BLUE_HEADER];
+    
     
 }
 
