@@ -11,6 +11,7 @@
 #import "searchDataSetViewController.h"
 #import "DatepickerViewController.h"
 #import "MyTableViewController.h"
+#import "AlumniNearByViewController.h"
 
 @interface AlumniSearchViewController ()
 @property (strong ,nonatomic) NSString *Name;
@@ -101,6 +102,12 @@ int selectedIndex;
         
         DatepickerViewController *vc = [segue destinationViewController];
         vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
+    }else if ([segue.identifier isEqualToString:@"SEARCH_MAP_SEGUE"]){
+        
+        AlumniNearByViewController *vc = [segue destinationViewController];
+        //vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
+        vc.is_search_segue = YES;
+        vc.PFObjectList = self.PfObjectList;
     }
     
 
@@ -154,6 +161,10 @@ int selectedIndex;
     [AluminiDataSearch loadAluminiDataForFilters:self.selectedData andCompletionBlock:^(NSArray *objects, NSError *error) {
         
         NSLog(@"Objects = %@", objects);
+        if (objects) {
+            self.PfObjectList = objects;
+            [self performSegueWithIdentifier:@"SEARCH_MAP_SEGUE" sender:self];
+        }
         
     }];
 

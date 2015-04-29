@@ -34,8 +34,7 @@ MKCoordinateRegion region;
     isLocation = NO;
     isSearch = NO;
 
-    self.geocoder = [[CLGeocoder alloc] init];
-    [self getUserCurrentLocation];
+    
     [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor grayColor]];
     [self.footer_view setBackgroundColor:BLUE_HEADER];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor blackColor]];
@@ -65,6 +64,15 @@ MKCoordinateRegion region;
         self.navigationItem.leftBarButtonItem = backButtonItem;
         self.bottomView.hidden = YES;
         self.slider.hidden = YES;
+    }else if(self.is_search_segue){
+    
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    }else {
+    
+        self.geocoder = [[CLGeocoder alloc] init];
+        [self getUserCurrentLocation];
     }
     
 }
@@ -185,7 +193,7 @@ MKCoordinateRegion region;
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *currLocation = [locations lastObject];
-    if(!self.is_login_segue){
+    if(!self.is_login_segue && !self.is_search_segue){
         [self getUsersNearMyLocation:currLocation];
     }
     
