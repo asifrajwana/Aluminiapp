@@ -18,6 +18,8 @@ __weak IBOutlet UITableView *tableview;
 
 @property (strong, nonatomic) NSMutableArray *selectedData;
 
+@property (strong,nonatomic) NSArray *PfObjectList;
+
 @property (strong, nonatomic) AlumniSearchCustomCellTableViewCell *cellSelected;
 - (IBAction)searchAluminiByGivenFilters:(id)sender;
 @end

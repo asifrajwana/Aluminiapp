@@ -217,6 +217,7 @@
                         <segue destination="3TP-fY-SrJ" kind="push" identifier="SEARCH_DATA_TEXT_SEGUE" id="Kg2-WR-ikA"/>
                         <segue destination="rLL-V0-BKu" kind="push" identifier="SEARCH_DATA_DATE_SEGUE" id="rqy-jy-BTa"/>
                         <segue destination="Yd9-sm-8Tf" kind="push" identifier="SEARCH_LOCATION_SEGUE" id="vNJ-Jl-VPY"/>
+                        <segue destination="Jx1-rc-CoT" kind="push" identifier="SEARCH_MAP_SEGUE" id="Q3g-7n-HmX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ak-59-jlz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1042,7 +1043,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="l6h-M7-OG0"/>
-        <segue reference="G2E-fc-QNP"/>
+        <segue reference="Q3g-7n-HmX"/>
         <segue reference="Ttn-J9-xHo"/>
     </inferredMetricsTieBreakers>
 </document>

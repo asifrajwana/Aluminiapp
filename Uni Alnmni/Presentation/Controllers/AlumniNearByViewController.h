@@ -28,6 +28,7 @@
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) NSArray *cordList;
 @property bool is_login_segue;
+@property bool is_search_segue;
 @property (strong, nonatomic) MKMapItem *mapitem;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIView *footer_view;
