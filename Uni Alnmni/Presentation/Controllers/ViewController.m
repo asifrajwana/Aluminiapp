@@ -35,11 +35,14 @@ UIAlertView *alertToEnableDeviceLocation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header1"]];
+
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    
+    [self.footer_view setBackgroundColor:BLUE_HEADER];
     NSString *access_token = [defaults objectForKey:@"access_token"];
     [self getUserCurrentLocation];
     if (access_token) {

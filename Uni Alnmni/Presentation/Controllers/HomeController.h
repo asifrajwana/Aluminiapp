@@ -15,6 +15,7 @@
     __weak IBOutlet UITableView *tableview;
     
     __weak IBOutlet UIButton *tell_your_friend_button;
+    __weak IBOutlet UIView *footer_view;
 }
 
 

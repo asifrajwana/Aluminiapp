@@ -16,27 +16,26 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="11">
-                    <rect key="frame" x="282" y="282" width="37" height="37"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="37" id="3Yy-WP-dQJ"/>
-                        <constraint firstAttribute="width" constant="37" id="XAx-eZ-i0F"/>
-                    </constraints>
-                </activityIndicatorView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UniversirtyLogo_Title" translatesAutoresizingMaskIntoConstraints="NO" id="zeO-HX-hvp">
-                            <rect key="frame" x="0.0" y="18" width="600" height="42"/>
-                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orh-bF-fzf">
+                            <rect key="frame" x="235" y="21" width="130" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="dEv-be-X1m"/>
+                                <constraint firstAttribute="width" constant="130" id="maA-6V-A4m"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.050980396570000003" green="0.45882356169999999" blue="0.70980393890000004" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.029544466904969899" green="0.16653672075922749" blue="0.50065768494897966" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="64" id="9Bk-Cd-W15"/>
-                        <constraint firstAttribute="trailing" secondItem="zeO-HX-hvp" secondAttribute="trailing" id="V7v-YX-Db8"/>
-                        <constraint firstItem="zeO-HX-hvp" firstAttribute="top" secondItem="21" secondAttribute="top" constant="18" id="eoD-Ju-UGr"/>
-                        <constraint firstItem="zeO-HX-hvp" firstAttribute="leading" secondItem="21" secondAttribute="leading" id="hSP-0V-wJ6"/>
-                        <constraint firstAttribute="bottom" secondItem="zeO-HX-hvp" secondAttribute="bottom" constant="4" id="hgP-2G-Ejy"/>
+                        <constraint firstItem="orh-bF-fzf" firstAttribute="top" secondItem="21" secondAttribute="top" constant="21" id="9m8-h6-hgb"/>
+                        <constraint firstAttribute="bottom" secondItem="orh-bF-fzf" secondAttribute="bottom" constant="8" id="FhP-Xg-mKI"/>
+                        <constraint firstAttribute="centerX" secondItem="orh-bF-fzf" secondAttribute="centerX" id="Q7I-o7-tNz"/>
                     </constraints>
                 </view>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7">
@@ -46,6 +45,13 @@
                         <outlet property="delegate" destination="-1" id="9"/>
                     </connections>
                 </webView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="11">
+                    <rect key="frame" x="282" y="282" width="37" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="3Yy-WP-dQJ"/>
+                        <constraint firstAttribute="width" constant="37" id="XAx-eZ-i0F"/>
+                    </constraints>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -63,7 +69,4 @@
             <point key="canvasLocation" x="234" y="242"/>
         </view>
     </objects>
-    <resources>
-        <image name="UniversirtyLogo_Title" width="222" height="44"/>
-    </resources>
 </document>

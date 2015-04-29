@@ -28,6 +28,7 @@
     [NSThread sleepForTimeInterval:3.0];
     [Parse enableLocalDatastore];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"logo"] forBarMetrics:UIBarMetricsDefault];
     
     // Initialize Parse.
     [Parse setApplicationId:@"4jo1sGjnYSLUpCYVmLrzLYO3EAIM7wMPGUmIBMqm"

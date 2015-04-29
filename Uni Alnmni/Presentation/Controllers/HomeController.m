@@ -18,14 +18,17 @@ BOOL isAlumni;
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    homeList = @[@"Alunmi Nearby",@"Alumni Search",@"Profile",@"Campus Directory",@"News & Social"];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    
+    tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    homeList = @[@"Alunmi Nearby",@"Search Alumni",@"Profile",@"Directory",@"News and Social"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [footer_view setBackgroundColor:BLUE_HEADER];
     isAlumni = [[defaults objectForKey:@"isAlumni"] boolValue];
     [tell_your_friend_button setBackgroundColor:BLUE_LIGHT_Color];
     NSLog(isAlumni ? @"Yes" : @"No");
-    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header1"]];
+
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:@"lost angel"
                  completionHandler:^(NSArray* placemarks, NSError* error){
@@ -80,13 +83,13 @@ BOOL isAlumni;
     }
     
     if (indexPath.row==0) {
-        cell.cellImage.image = [UIImage imageNamed:@"globe"];
+        cell.cellImage.image = [UIImage imageNamed:@"nearby"];
     }else if (indexPath.row==1){
-        cell.cellImage.image = [UIImage imageNamed:@"search"];
+        cell.cellImage.image = [UIImage imageNamed:@"globe"];
     }else if (indexPath.row==2){
         cell.cellImage.image = [UIImage imageNamed:@"people_like_me"];
     }else if (indexPath.row==3){
-        cell.cellImage.image = [UIImage imageNamed:@"grad-cap"];
+        cell.cellImage.image = [UIImage imageNamed:@"search"];
     }else if (indexPath.row==4){
         cell.cellImage.image = [UIImage imageNamed:@"news"];
         
