@@ -27,6 +27,7 @@
     
     [NSThread sleepForTimeInterval:3.0];
     [Parse enableLocalDatastore];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     // Initialize Parse.
     [Parse setApplicationId:@"4jo1sGjnYSLUpCYVmLrzLYO3EAIM7wMPGUmIBMqm"
