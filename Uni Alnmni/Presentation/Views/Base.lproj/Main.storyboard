@@ -23,12 +23,12 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbS-7r-i89">
-                                <rect key="frame" x="193" y="465" width="215" height="41"/>
+                                <rect key="frame" x="158" y="458" width="286" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bbS-7r-i89" secondAttribute="height" multiplier="215:41" id="cVm-Me-TGJ"/>
                                     <constraint firstAttribute="width" secondItem="bbS-7r-i89" secondAttribute="height" multiplier="270:41" id="oBl-i7-vff"/>
                                 </constraints>
-                                <state key="normal" image="Sign-in-Large---Default">
+                                <state key="normal" image="enter_linkedin_OFF">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -40,7 +40,7 @@
                                     <action selector="signInLinkedIn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Vj7-dz-pfG"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B3X-N3-0rR">
+                            <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B3X-N3-0rR">
                                 <rect key="frame" x="290" y="437" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="375-ga-KOj"/>
@@ -1030,16 +1030,16 @@
     <resources>
         <image name="Icon-60" width="60" height="60"/>
         <image name="Icon-72.png" width="72" height="72"/>
-        <image name="Sign-in-Large---Default" width="215" height="41"/>
         <image name="UniversirtyLogo_Title" width="222" height="44"/>
         <image name="auth_view" width="320" height="480"/>
         <image name="compass_blue" width="64" height="64"/>
+        <image name="enter_linkedin_OFF" width="286" height="45"/>
         <image name="ico-to-do-list" width="18" height="10"/>
         <image name="linkedin_attribution" width="19" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="VBh-0T-Qxz"/>
         <segue reference="o3T-C1-q09"/>
         <segue reference="l6h-M7-OG0"/>
-        <segue reference="G2E-fc-QNP"/>
     </inferredMetricsTieBreakers>
 </document>
