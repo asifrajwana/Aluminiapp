@@ -87,6 +87,7 @@
 		E0ADE2CB1AE00B8000415143 /* AlumniSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0ADE2CA1AE00B8000415143 /* AlumniSearchViewController.m */; };
 		E0ADE2CE1AE00E0100415143 /* AlumniSearchCustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0ADE2CD1AE00E0000415143 /* AlumniSearchCustomCellTableViewCell.m */; };
 		E0B24AA41AE929DD0029C4CC /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B24AA31AE929DD0029C4CC /* MyTableViewController.m */; };
+		E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +208,8 @@
 		E0ADE2CD1AE00E0000415143 /* AlumniSearchCustomCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlumniSearchCustomCellTableViewCell.m; sourceTree = "<group>"; };
 		E0B24AA21AE929DD0029C4CC /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
 		E0B24AA31AE929DD0029C4CC /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
+		E0CB18131AF0ED5700D0B318 /* AluminiDataSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AluminiDataSearch.h; sourceTree = "<group>"; };
+		E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AluminiDataSearch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -487,6 +490,7 @@
 		E0A5FA7C1ADBDDFD00B467D7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E0CB18121AF0ED4200D0B318 /* AluminiSearch */,
 				E0A5028B1AE65ED90038306B /* user */,
 				E0AB8EAA1ADFC6E600A58AFA /* CurrentLocation */,
 				E08C962D1ADD5ABE006FC7F3 /* CustomHeaderView */,
@@ -610,6 +614,15 @@
 				E0A3EAAF1AE7EDA000A949DA /* DatepickerViewController.m */,
 			);
 			name = AlumniSearch;
+			sourceTree = "<group>";
+		};
+		E0CB18121AF0ED4200D0B318 /* AluminiSearch */ = {
+			isa = PBXGroup;
+			children = (
+				E0CB18131AF0ED5700D0B318 /* AluminiDataSearch.h */,
+				E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */,
+			);
+			name = AluminiSearch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -760,6 +773,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E08C96081ADD25DD006FC7F3 /* OAAtachmentF.h in Sources */,
+				E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */,
 				E08C96091ADD25DD006FC7F3 /* OAAttachment.h in Sources */,
 				E08C960A1ADD25DD006FC7F3 /* OACall.h in Sources */,
 				E0B24AA41AE929DD0029C4CC /* MyTableViewController.m in Sources */,

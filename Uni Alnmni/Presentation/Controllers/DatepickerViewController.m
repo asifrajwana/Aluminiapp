@@ -22,10 +22,16 @@
     hint.text = self.hintSet;
     //self.picker.datePickerMode = UIDatePickerModeDate;
     [self.picker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
+    [self setDateFromPicker:self.picker];
     // Do any additional setup after loading the view.
 }
 
 - (void)datePickerChanged:(UIDatePicker *)datePicker
+{
+    [self setDateFromPicker:datePicker];
+}
+
+-(void) setDateFromPicker : (UIDatePicker *) datePicker
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy"];
