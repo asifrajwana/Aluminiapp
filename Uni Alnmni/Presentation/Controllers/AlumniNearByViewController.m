@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 
 #define MINIMUM_ZOOM_ARC 0.05 //approximately 1 miles (1 degree of arc ~= 69 miles)
-#define ANNOTATION_REGION_PAD_FACTOR 1.25
+#define ANNOTATION_REGION_PAD_FACTOR 2.00
 #define MAX_DEGREES_ARC 360
 
 @interface AlumniNearByViewController ()
@@ -45,16 +45,14 @@ MKCoordinateRegion region;
     
     self.mapViewAlumni.delegate = self;
 
-    
-    region.span = MKCoordinateSpanMake(location.coordinate.latitude , location.coordinate.longitude);
     self.slider.minimumValue = 0.1;
     self.slider.maximumValue = 1.0;
     self.slider.value  = 0.1;
-//    MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
-//    annotation.coordinate = location.coordinate;
-//    //annotation.title = location.;
-//    [self.mapViewAlumni addAnnotation:annotation];
-    if(self.is_login_segue){
+    
+    [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
+    
+    if(self.is_login_segue)
+    {
         UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc]
                                        initWithTitle:@"Done"
                                        style:UIBarButtonItemStyleDone
@@ -64,12 +62,19 @@ MKCoordinateRegion region;
         self.navigationItem.leftBarButtonItem = backButtonItem;
         self.bottomView.hidden = YES;
         self.slider.hidden = YES;
-    }else if(self.is_search_segue){
+        self.geocoder = [[CLGeocoder alloc] init];
+        [self getUserCurrentLocation];
+    }
+    else if(self.is_search_segue)
+    {
     
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        [self showAllOnMap:self.PFObjectList];
     
-    }else {
+    }
+    else
+    {
     
         self.geocoder = [[CLGeocoder alloc] init];
         [self getUserCurrentLocation];
@@ -80,11 +85,11 @@ MKCoordinateRegion region;
 -(void)viewWillAppear:(BOOL)animated{
     
     //[self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    /*MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     annotation.coordinate = location.coordinate;
     //annotation.title      = item.name;
     //annotation.subtitle   = item.placemark.title;
-    [self.mapViewAlumni addAnnotation:annotation];
+    [self.mapViewAlumni addAnnotation:annotation];*/
     //[self.mapViewAlumni setRegion:self.boundingRegion animated:YES];
 }
 
@@ -168,7 +173,7 @@ MKCoordinateRegion region;
                 locationManager.delegate = self;
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest;
                 [locationManager startUpdatingLocation];
-                self.mapViewAlumni.showsUserLocation=YES;
+                self.mapViewAlumni.showsUserLocation = YES;
                 
                 break;
                 
@@ -193,37 +198,19 @@ MKCoordinateRegion region;
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *currLocation = [locations lastObject];
+    self.location = currLocation;
+    [manager stopUpdatingLocation];
+    manager.delegate = nil;
+    
     if(!self.is_login_segue && !self.is_search_segue){
         [self getUsersNearMyLocation:currLocation];
     }
     
-    [manager stopUpdatingLocation];
-    manager.delegate = nil;
-    
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currLocation.coordinate, 700, 700);
+    /*MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currLocation.coordinate, 700, 700);
     [self.mapViewAlumni setRegion:[self.mapViewAlumni regionThatFits:region] animated:YES];
     self.mapViewAlumni.showsUserLocation = YES;
     isLocation = NO;
-    
-    [self.geocoder reverseGeocodeLocation:currLocation
-                        completionHandler:^(NSArray *placemarks, NSError *error) {
-                            if (error) {
-                                NSLog(@"error find here was %@",error);
-                            }
-                            
-                            //self.doneButton.hidden = YES;
-                            
-                            if ( !error && [placemarks count] > 0)
-                            {
-                                MKPlacemark *firstPlace = [placemarks firstObject];
-                                self.location = firstPlace.location;
-                                [self setAndAddAnnotation:self.location.coordinate];
-                                //NSString *locationText = [self niceNameForPlacemark:firstPlace];
-                                //self.locationLabel.text = locationText;
-                            }
-                            
-                        }];
-    
+    */
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
@@ -245,20 +232,29 @@ MKCoordinateRegion region;
     }
 }
 
-
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKPinAnnotationView *annotationView = nil;
-    if ([annotation isKindOfClass:[MKAnnotationView class]])
+    static NSString *defaultPinID = @"Pin";
+    MKAnnotationView *pinView = nil;
+    pinView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+    if ( pinView == nil )
+        pinView = [[MKAnnotationView alloc]
+                   initWithAnnotation:annotation reuseIdentifier:defaultPinID];
+    
+    pinView.enabled = YES;
+    pinView.canShowCallout = YES;
+
+    if(annotation != mapView.userLocation)
     {
-        annotationView = (MKPinAnnotationView *)[self.mapViewAlumni dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
-        if (annotationView == nil)
-        {
-            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
-            annotationView.animatesDrop = YES;
-        }
+        pinView.image = [UIImage imageNamed:@"pin_e"];
     }
-    return annotationView;
+    else
+    {
+        self.mapViewAlumni.showsUserLocation = YES;
+        pinView.image = [UIImage imageNamed:@"pin_a"];
+    }
+    return pinView;
+    
 }
 
 - (void) reverseGeocodeAndDisplayCenterOfMap {
@@ -287,7 +283,7 @@ MKCoordinateRegion region;
                             {
                                 MKPlacemark *firstPlace = [placemarks firstObject];
                                 NSString *locationText = [self niceNameForPlacemark:firstPlace];
-                                //self.location = firstPlace.location;
+                                self.location = firstPlace.location;
                                 //[self setAndAddAnnotation:self.location.coordinate];
                                 //self.locationLabel.text = locationText;
                             }
@@ -312,7 +308,6 @@ MKCoordinateRegion region;
     
     MKCoordinateRegion region = MKCoordinateRegionForMapRect(mapRect);
     
-    
     region.span.latitudeDelta  *= ANNOTATION_REGION_PAD_FACTOR;
     region.span.longitudeDelta *= ANNOTATION_REGION_PAD_FACTOR;
     
@@ -328,27 +323,6 @@ MKCoordinateRegion region;
         region.span.latitudeDelta = MINIMUM_ZOOM_ARC;
         region.span.longitudeDelta = MINIMUM_ZOOM_ARC;
     }
-    
-    [mapView setRegion:region animated:animated];
-}
-
-
-- (void)zoomMapViewToFitAnnotation:(MKMapView *)mapView animated:(BOOL)animated andAnnotation : (MKPointAnnotation *) annotation
-{
-    
-    MKMapPoint points[1];
-    for( int i=0; i<1; i++ )
-    {
-        CLLocationCoordinate2D coordinate = [(id <MKAnnotation>)annotation coordinate];
-        points[i] = MKMapPointForCoordinate(coordinate);
-    }
-    
-    MKMapRect mapRect = [[MKPolygon polygonWithPoints:points count:1] boundingMapRect];
-    
-    MKCoordinateRegion region = MKCoordinateRegionForMapRect(mapRect);
-    
-    region.span.latitudeDelta = MINIMUM_ZOOM_ARC;
-    region.span.longitudeDelta = MINIMUM_ZOOM_ARC;
     
     [mapView setRegion:region animated:animated];
 }
@@ -536,7 +510,7 @@ MKCoordinateRegion region;
 
 - (void) setAndAddAnnotation : (CLLocationCoordinate2D) Cordinate
 {
-    //[self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
+
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     annotation.coordinate = Cordinate;
     //annotation.title      = item.name;
@@ -660,48 +634,82 @@ MKCoordinateRegion region;
     
 }
 
--(void)getUsersNearMyLocation : (CLLocation *) locationOfCurUser{
+-(void)getUsersNearMyLocation : (CLLocation *) locationOfCurUser
+{
+    /*[self.geocoder reverseGeocodeLocation:locationOfCurUser
+                        completionHandler:^(NSArray *placemarks, NSError *error) {
+                            if (error) {
+                                NSLog(@"error find here was %@",error);
+                            }
+                            
+                            //self.doneButton.hidden = YES;
+                            
+                            if ( !error && [placemarks count] > 0)
+                            {
+                                MKPlacemark *firstPlace = [placemarks firstObject];
+                                NSLog(@"name = %@", [self niceNameForPlacemark:firstPlace]);
+                                self.location = firstPlace.location;
+                                [self setAndAddAnnotation:self.location.coordinate];
+                                //NSString *locationText = [self niceNameForPlacemark:firstPlace];
+                                //self.locationLabel.text = locationText;
+                            }
+                            
+                        }];*/
+    
     
     PFQuery *query = [PFQuery queryWithClassName:@"LinkedInUser"];
-    //[query selectKeys:[NSArray arrayWithObjects:@"coordinates", nil]];
-    [query whereKey:@"coordinates" nearGeoPoint:[PFGeoPoint geoPointWithLocation:locationOfCurUser]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [query whereKey:@"coordinates" nearGeoPoint:[PFGeoPoint geoPointWithLocation:locationOfCurUser] withinKilometers:100.0];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *userObjects, NSError *error)
+    {
         
         [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
         
-        if ([objects count]) {
-            self.cordList = objects;
-            float a= 0.0;
-            float b= 0.0;
-            self.PFObjectList = objects;
-            [self showAllOnMap];
-//            for (PFObject *obj in objects) {
-//                NSLog(@"Data : %@",obj);
-//                //self.PFObjectList
-//                PFGeoPoint *objGeoPoint = obj[@"coordinates"];
-//
-//                [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude)];
-//                
-//            }
-            //[self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
+        if ([userObjects count]) {
+            
+            self.PFObjectList = userObjects;
+            [self showAllOnMap:userObjects];
+            
+            
+            NSMutableArray *educationObjects = [[NSMutableArray alloc] init];
+            
+            for (PFObject *obj in userObjects) {
+                
+                PFRelation *relation = [obj relationForKey:@"userEducation"];
+                PFQuery *userEducationQuery = [relation query];
+                [userEducationQuery orderByDescending:@"startDate"];
+                
+                [userEducationQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                   
+                    if (object)
+                    {
+                        [educationObjects addObject:object];
+                    
+                        self.PFObjectListEducationData = educationObjects;
+                    }
+                    else if (error)
+                    {
+                        [educationObjects addObject:@""];
+                    }
+                }];
+            }
+            
         }
         
     }];
 
 }
 
--(void)showAllOnMap{
-    for (PFObject *obj in self.PFObjectList) {
-        NSLog(@"Data : %@",obj);
-        //self.PFObjectList
+-(void)showAllOnMap : (NSArray *) ObjectsUsers
+{
+    for (PFObject *obj in ObjectsUsers)
+    {
         PFGeoPoint *objGeoPoint = obj[@"coordinates"];
         
         [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude)];
-        
     }
-    //[self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
-
-
+    
+    [self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -711,6 +719,7 @@ MKCoordinateRegion region;
         // Pass any objects to the view controller here, like...
         vc.is_map_list = YES;
         vc.mapUserList = self.PFObjectList;
+        vc.mapUserListData = self.PFObjectListEducationData;
     }
 
 }
@@ -718,12 +727,15 @@ MKCoordinateRegion region;
 - (IBAction)unwindToAlumniNearByController:(UIStoryboardSegue *)unwindSegue{
     if ([unwindSegue.sourceViewController isKindOfClass:[SocialNewsViewController class]]) {
         SocialNewsViewController *vc = unwindSegue.sourceViewController;
-        if (vc.row !=nil) {
+        //if (vc.row !=nil) {
+        NSLog(@"Row = %i", vc.row);
             PFObject *obj = [self.PFObjectList objectAtIndex:vc.row];
             PFGeoPoint *objGeoPoint = obj[@"coordinates"];
-            
+            [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
             [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude)];
-        }
+            [self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
+        
+        //}
     }
 }
 

@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) NSArray *mapItemList;
 @property (nonatomic, strong) NSArray *PFObjectList;
+@property (nonatomic, strong) NSArray *PFObjectListEducationData;
 @property (nonatomic, assign) MKCoordinateRegion boundingRegion;
 @property (nonatomic, strong) MKLocalSearch *localSearch;
 @property (nonatomic) CLLocationCoordinate2D userLocation;
@@ -36,5 +37,6 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapViewAlumni;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
+
 
 @end

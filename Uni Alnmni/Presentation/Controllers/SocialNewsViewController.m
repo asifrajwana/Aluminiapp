@@ -33,6 +33,8 @@ NSInteger row;
     @"http://leadstech.com/projects/html/alumni/",
     @"https://www.linkedin.com/company/bucknell-university",nil];
     }
+    
+    NSLog(@"User Edu = %@", self.mapUserListData);
     // Do any additional setup after loading the view.
 }
 
@@ -68,11 +70,21 @@ NSInteger row;
         PFObject *obj = [self.mapUserList objectAtIndex:indexPath.row];
         NSString *first_name = obj[@"firstName"];
         NSString *last_name = obj[@"lastName"];
-        PFGeoPoint *objGeoPoint = obj[@"coordinates"];
-        NSString *name= [first_name stringByAppendingString:last_name];
-        NSString *location= [NSString stringWithFormat:@"%f %f",objGeoPoint.latitude,objGeoPoint.longitude];
+        NSString *name= [first_name stringByAppendingString:@" "];
+        name = [name stringByAppendingString:last_name];
+        
+        NSString *degree;
+        
+        if ([[self.mapUserListData objectAtIndex:indexPath.row] respondsToSelector:@selector(isEqualToString:)]) {
+            degree = @"start-end";
+        }
+        else
+        {
+            degree = [NSString stringWithFormat:@"%@",[self.mapUserListData objectAtIndex:indexPath.row][@"endDate"]];
+        }
+        
         cell.cellCatagoryText.text = name;
-        cell.cellSelectedText.text = location;
+        cell.cellSelectedText.text = degree;
         cell.cellImage = nil;
         return cell;
     }else {
@@ -117,6 +129,8 @@ NSInteger row;
     }
     if ([segue.identifier isEqualToString:@"UNWIND_NEARBY_SEGUE"] ) {
         
+        NSLog(@"Self row = %d", self.row);
+        self.row = [socialTableview indexPathForSelectedRow].row;
     }
 }
 

@@ -349,8 +349,8 @@ UIAlertView *alertToEnableDeviceLocation;
         
         educationPFObject[@"degree"] = [edu objectForKey:@"degree"];
         educationPFObject[@"schoolName"] = [edu objectForKey:@"schoolName"];
-        educationPFObject[@"endDate"] = [NSString stringWithFormat:@"%@", [[edu objectForKey:@"endDate"] objectForKey:@"year"]];
-        educationPFObject[@"startDate"] = [NSString stringWithFormat:@"%@", [[edu objectForKey:@"startDate"] objectForKey:@"year"]];
+        educationPFObject[@"endDate"] = [[edu objectForKey:@"endDate"] objectForKey:@"year"];
+        educationPFObject[@"startDate"] = [[edu objectForKey:@"startDate"] objectForKey:@"year"];
         
         [educationPFObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             

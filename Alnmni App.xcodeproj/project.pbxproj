@@ -79,7 +79,6 @@
 		E0A5FA571ADBDB1500B467D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A5FA561ADBDB1500B467D7 /* ViewController.m */; };
 		E0A5FA5C1ADBDB1500B467D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0A5FA5B1ADBDB1500B467D7 /* Images.xcassets */; };
 		E0A5FA831ADC081F00B467D7 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A5FA821ADC081F00B467D7 /* HomeController.m */; };
-		E0A7387E1ADEAAA800888CFE /* AlumniNearByViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7387D1ADEAAA800888CFE /* AlumniNearByViewController.m */; };
 		E0A738801ADEBBB200888CFE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A7387F1ADEBBB200888CFE /* MapKit.framework */; };
 		E0AA71451AE10C820083063C /* SocialNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AA71441AE10C820083063C /* SocialNewsViewController.m */; };
 		E0AA71491AE11BF60083063C /* AllWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AA71481AE11BF60083063C /* AllWebView.m */; };
@@ -88,6 +87,7 @@
 		E0ADE2CE1AE00E0100415143 /* AlumniSearchCustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0ADE2CD1AE00E0000415143 /* AlumniSearchCustomCellTableViewCell.m */; };
 		E0B24AA41AE929DD0029C4CC /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B24AA31AE929DD0029C4CC /* MyTableViewController.m */; };
 		E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */; };
+		E0CE96FB1AF114CC00201AF0 /* AlumniNearByViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CE96FA1AF114CC00201AF0 /* AlumniNearByViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,8 +193,6 @@
 		E0A5FA6A1ADBDB1500B467D7 /* Uni_AlnmniTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uni_AlnmniTests.m; sourceTree = "<group>"; };
 		E0A5FA811ADC081F00B467D7 /* HomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeController.h; sourceTree = "<group>"; };
 		E0A5FA821ADC081F00B467D7 /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
-		E0A7387C1ADEAAA800888CFE /* AlumniNearByViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlumniNearByViewController.h; sourceTree = "<group>"; };
-		E0A7387D1ADEAAA800888CFE /* AlumniNearByViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlumniNearByViewController.m; sourceTree = "<group>"; };
 		E0A7387F1ADEBBB200888CFE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E0AA71431AE10C820083063C /* SocialNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNewsViewController.h; sourceTree = "<group>"; };
 		E0AA71441AE10C820083063C /* SocialNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNewsViewController.m; sourceTree = "<group>"; };
@@ -210,6 +208,8 @@
 		E0B24AA31AE929DD0029C4CC /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
 		E0CB18131AF0ED5700D0B318 /* AluminiDataSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AluminiDataSearch.h; sourceTree = "<group>"; };
 		E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AluminiDataSearch.m; sourceTree = "<group>"; };
+		E0CE96F91AF114CC00201AF0 /* AlumniNearByViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlumniNearByViewController.h; sourceTree = "<group>"; };
+		E0CE96FA1AF114CC00201AF0 /* AlumniNearByViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlumniNearByViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -566,8 +566,8 @@
 		E0A7387B1ADEAA7C00888CFE /* AlumniNearBy */ = {
 			isa = PBXGroup;
 			children = (
-				E0A7387C1ADEAAA800888CFE /* AlumniNearByViewController.h */,
-				E0A7387D1ADEAAA800888CFE /* AlumniNearByViewController.m */,
+				E0CE96F91AF114CC00201AF0 /* AlumniNearByViewController.h */,
+				E0CE96FA1AF114CC00201AF0 /* AlumniNearByViewController.m */,
 			);
 			name = AlumniNearBy;
 			sourceTree = "<group>";
@@ -676,7 +676,7 @@
 				TargetAttributes = {
 					E0A5FA4A1ADBDB1500B467D7 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 73DK7G23Z7;
+						DevelopmentTeam = Q53Z7T2ECL;
 					};
 					E0A5FA631ADBDB1500B467D7 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -775,6 +775,7 @@
 				E08C96081ADD25DD006FC7F3 /* OAAtachmentF.h in Sources */,
 				E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */,
 				E08C96091ADD25DD006FC7F3 /* OAAttachment.h in Sources */,
+				E0CE96FB1AF114CC00201AF0 /* AlumniNearByViewController.m in Sources */,
 				E08C960A1ADD25DD006FC7F3 /* OACall.h in Sources */,
 				E0B24AA41AE929DD0029C4CC /* MyTableViewController.m in Sources */,
 				E08C960B1ADD25DD006FC7F3 /* OAConsumer.h in Sources */,
@@ -822,7 +823,6 @@
 				E0A5FA541ADBDB1500B467D7 /* AppDelegate.m in Sources */,
 				E08C95A91ADD1699006FC7F3 /* sha1.c in Sources */,
 				E08C96301ADD5B2E006FC7F3 /* CustomHeader.m in Sources */,
-				E0A7387E1ADEAAA800888CFE /* AlumniNearByViewController.m in Sources */,
 				E08C95A41ADD1699006FC7F3 /* NSMutableURLRequest+Parameters.m in Sources */,
 				E08C95A51ADD1699006FC7F3 /* NSString+URLEncoding.m in Sources */,
 				E08C95F01ADD16DB006FC7F3 /* OAToken.m in Sources */,

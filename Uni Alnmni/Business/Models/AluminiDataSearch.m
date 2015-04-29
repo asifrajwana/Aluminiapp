@@ -74,13 +74,13 @@
                         
                         if ([dates objectAtIndex:0]) {
                             PFQuery *innerQuery = [PFQuery queryWithClassName:@"Education"];
-                            [innerQuery whereKey:@"startDate" matchesRegex:[dates objectAtIndex:0] modifiers:@"i"];
+                            [innerQuery whereKey:@"startDate" equalTo:[NSNumber numberWithInt:[[dates objectAtIndex:0] intValue]]];
                             [aluminiQuery whereKey:@"userEducation" matchesQuery:innerQuery];
                         }
                         
                         if ([dates count] > 1 && [dates objectAtIndex:1]) {
                             PFQuery *innerQuery = [PFQuery queryWithClassName:@"Education"];
-                            [innerQuery whereKey:@"endDate" matchesRegex:[dates objectAtIndex:1] modifiers:@"i"];
+                            [innerQuery whereKey:@"endDate" equalTo:[NSNumber numberWithInt:[[dates objectAtIndex:1] intValue]]];
                             [aluminiQuery whereKey:@"userEducation" matchesQuery:innerQuery];
                         }
                     }
