@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		C4E61101920E2689BDEB5C48 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DDDC40BF3AC8C53086728A5 /* libPods.a */; };
 		E04DAADF1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E04DAADE1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m */; };
+		E06D6D491AF222530013E1C9 /* AluminiSearchResultsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06D6D481AF222530013E1C9 /* AluminiSearchResultsTableController.m */; };
+		E06D6D4C1AF2551F0013E1C9 /* AluminiAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E06D6D4B1AF2551F0013E1C9 /* AluminiAnnotation.m */; };
+		E06D6D4F1AF267460013E1C9 /* LocationPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06D6D4E1AF267460013E1C9 /* LocationPickerController.m */; };
 		E08C95A41ADD1699006FC7F3 /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = E08C95981ADD1699006FC7F3 /* NSMutableURLRequest+Parameters.m */; };
 		E08C95A51ADD1699006FC7F3 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = E08C959A1ADD1699006FC7F3 /* NSString+URLEncoding.m */; };
 		E08C95A61ADD1699006FC7F3 /* NSURL+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = E08C959C1ADD1699006FC7F3 /* NSURL+Base.m */; };
@@ -79,7 +82,6 @@
 		E0A5FA571ADBDB1500B467D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A5FA561ADBDB1500B467D7 /* ViewController.m */; };
 		E0A5FA5C1ADBDB1500B467D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0A5FA5B1ADBDB1500B467D7 /* Images.xcassets */; };
 		E0A5FA831ADC081F00B467D7 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A5FA821ADC081F00B467D7 /* HomeController.m */; };
-		E0A7387E1ADEAAA800888CFE /* AlumniNearByViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7387D1ADEAAA800888CFE /* AlumniNearByViewController.m */; };
 		E0A738801ADEBBB200888CFE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A7387F1ADEBBB200888CFE /* MapKit.framework */; };
 		E0AA71451AE10C820083063C /* SocialNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AA71441AE10C820083063C /* SocialNewsViewController.m */; };
 		E0AA71491AE11BF60083063C /* AllWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AA71481AE11BF60083063C /* AllWebView.m */; };
@@ -90,6 +92,7 @@
 		E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */; };
 		E0F6DA051AF27A0D00D75FAA /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F6DA041AF27A0D00D75FAA /* SettingTableViewCell.m */; };
 		E0F6DA081AF27AB500D75FAA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F6DA071AF27AB500D75FAA /* SettingViewController.m */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +111,12 @@
 		242ABFB846980CF2FB94856D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E04DAADD1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenCustomCellTableViewCell.h; sourceTree = "<group>"; };
 		E04DAADE1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenCustomCellTableViewCell.m; sourceTree = "<group>"; };
+		E06D6D471AF222530013E1C9 /* AluminiSearchResultsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AluminiSearchResultsTableController.h; sourceTree = "<group>"; };
+		E06D6D481AF222530013E1C9 /* AluminiSearchResultsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AluminiSearchResultsTableController.m; sourceTree = "<group>"; };
+		E06D6D4A1AF2551F0013E1C9 /* AluminiAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AluminiAnnotation.h; sourceTree = "<group>"; };
+		E06D6D4B1AF2551F0013E1C9 /* AluminiAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AluminiAnnotation.m; sourceTree = "<group>"; };
+		E06D6D4D1AF267460013E1C9 /* LocationPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPickerController.h; sourceTree = "<group>"; };
+		E06D6D4E1AF267460013E1C9 /* LocationPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPickerController.m; sourceTree = "<group>"; };
 		E08C95971ADD1699006FC7F3 /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
 		E08C95981ADD1699006FC7F3 /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
 		E08C95991ADD1699006FC7F3 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
@@ -195,8 +204,6 @@
 		E0A5FA6A1ADBDB1500B467D7 /* Uni_AlnmniTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uni_AlnmniTests.m; sourceTree = "<group>"; };
 		E0A5FA811ADC081F00B467D7 /* HomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeController.h; sourceTree = "<group>"; };
 		E0A5FA821ADC081F00B467D7 /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
-		E0A7387C1ADEAAA800888CFE /* AlumniNearByViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlumniNearByViewController.h; sourceTree = "<group>"; };
-		E0A7387D1ADEAAA800888CFE /* AlumniNearByViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlumniNearByViewController.m; sourceTree = "<group>"; };
 		E0A7387F1ADEBBB200888CFE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E0AA71431AE10C820083063C /* SocialNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNewsViewController.h; sourceTree = "<group>"; };
 		E0AA71441AE10C820083063C /* SocialNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNewsViewController.m; sourceTree = "<group>"; };
@@ -216,6 +223,7 @@
 		E0F6DA041AF27A0D00D75FAA /* SettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewCell.m; sourceTree = "<group>"; };
 		E0F6DA061AF27AB500D75FAA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		E0F6DA071AF27AB500D75FAA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -553,6 +561,8 @@
 		E0A738791ADE886F00888CFE /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E06D6D4D1AF267460013E1C9 /* LocationPickerController.h */,
+				E06D6D4E1AF267460013E1C9 /* LocationPickerController.m */,
 				E0A5FA551ADBDB1500B467D7 /* ViewController.h */,
 				E0A5FA561ADBDB1500B467D7 /* ViewController.m */,
 			);
@@ -573,8 +583,12 @@
 		E0A7387B1ADEAA7C00888CFE /* AlumniNearBy */ = {
 			isa = PBXGroup;
 			children = (
-				E0A7387C1ADEAAA800888CFE /* AlumniNearByViewController.h */,
-				E0A7387D1ADEAAA800888CFE /* AlumniNearByViewController.m */,
+				E0CE96F91AF114CC00201AF0 /* AlumniNearByViewController.h */,
+				E0CE96FA1AF114CC00201AF0 /* AlumniNearByViewController.m */,
+				E06D6D471AF222530013E1C9 /* AluminiSearchResultsTableController.h */,
+				E06D6D481AF222530013E1C9 /* AluminiSearchResultsTableController.m */,
+				E06D6D4A1AF2551F0013E1C9 /* AluminiAnnotation.h */,
+				E06D6D4B1AF2551F0013E1C9 /* AluminiAnnotation.m */,
 			);
 			name = AlumniNearBy;
 			sourceTree = "<group>";
@@ -694,7 +708,7 @@
 				TargetAttributes = {
 					E0A5FA4A1ADBDB1500B467D7 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 73DK7G23Z7;
+						DevelopmentTeam = Q53Z7T2ECL;
 					};
 					E0A5FA631ADBDB1500B467D7 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -793,6 +807,7 @@
 				E08C96081ADD25DD006FC7F3 /* OAAtachmentF.h in Sources */,
 				E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */,
 				E08C96091ADD25DD006FC7F3 /* OAAttachment.h in Sources */,
+				E0CE96FB1AF114CC00201AF0 /* AlumniNearByViewController.m in Sources */,
 				E08C960A1ADD25DD006FC7F3 /* OACall.h in Sources */,
 				E0B24AA41AE929DD0029C4CC /* MyTableViewController.m in Sources */,
 				E08C960B1ADD25DD006FC7F3 /* OAConsumer.h in Sources */,
@@ -808,6 +823,8 @@
 				E08C96121ADD25DD006FC7F3 /* OAServiceTicket.h in Sources */,
 				E08C96131ADD25DD006FC7F3 /* OASignatureProviding.h in Sources */,
 				E08C96141ADD25DD006FC7F3 /* OAToken.h in Sources */,
+				E06D6D4F1AF267460013E1C9 /* LocationPickerController.m in Sources */,
+				E06D6D4C1AF2551F0013E1C9 /* AluminiAnnotation.m in Sources */,
 				E08C96151ADD25DD006FC7F3 /* OATokenManager.h in Sources */,
 				E08C96161ADD25DD006FC7F3 /* OAuthConsumer.h in Sources */,
 				E0ADE2CE1AE00E0100415143 /* AlumniSearchCustomCellTableViewCell.m in Sources */,
@@ -842,11 +859,11 @@
 				E0A5FA541ADBDB1500B467D7 /* AppDelegate.m in Sources */,
 				E08C95A91ADD1699006FC7F3 /* sha1.c in Sources */,
 				E08C96301ADD5B2E006FC7F3 /* CustomHeader.m in Sources */,
-				E0A7387E1ADEAAA800888CFE /* AlumniNearByViewController.m in Sources */,
 				E08C95A41ADD1699006FC7F3 /* NSMutableURLRequest+Parameters.m in Sources */,
 				E08C95A51ADD1699006FC7F3 /* NSString+URLEncoding.m in Sources */,
 				E08C95F01ADD16DB006FC7F3 /* OAToken.m in Sources */,
 				E0A3EAAD1AE7DA8100A949DA /* searchDataSetViewController.m in Sources */,
+				E06D6D491AF222530013E1C9 /* AluminiSearchResultsTableController.m in Sources */,
 				E08C95A71ADD1699006FC7F3 /* Base64Transcoder.c in Sources */,
 				E0A5FA511ADBDB1500B467D7 /* main.m in Sources */,
 				E08C95F11ADD16DB006FC7F3 /* OATokenManager.m in Sources */,

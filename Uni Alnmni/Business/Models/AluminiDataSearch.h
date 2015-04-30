@@ -12,4 +12,6 @@
 @interface AluminiDataSearch : NSObject
 
 +(void)loadAluminiDataForFilters:(NSArray *)filters andCompletionBlock:(void (^)(NSArray *objects, NSError *error))completionBlock;
+
++(void)loadEducationDataForObject:(PFObject *)object andCompletionBlock:(void (^)(PFObject *result, NSError *error))completionBlock;
 @end

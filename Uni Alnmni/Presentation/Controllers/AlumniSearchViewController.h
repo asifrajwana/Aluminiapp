@@ -22,4 +22,5 @@ __weak IBOutlet UITableView *tableview;
 
 @property (strong, nonatomic) AlumniSearchCustomCellTableViewCell *cellSelected;
 - (IBAction)searchAluminiByGivenFilters:(id)sender;
+- (IBAction)resetAllFields:(id)sender;
 @end

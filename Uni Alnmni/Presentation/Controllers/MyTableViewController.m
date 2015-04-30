@@ -123,6 +123,8 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (self.is_from_login) {
         
         [self performSegueWithIdentifier:@"LOGIN_CONTROLLER" sender:self];

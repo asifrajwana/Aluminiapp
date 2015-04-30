@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EDC3CCD1C3A29E533E3BBEDC"
+               BlueprintIdentifier = "BA0BA739794927DC607AF2B5"
                BuildableName = "libPods-MACachedImageView.a"
                BlueprintName = "Pods-MACachedImageView"
                ReferencedContainer = "container:Pods.xcodeproj">

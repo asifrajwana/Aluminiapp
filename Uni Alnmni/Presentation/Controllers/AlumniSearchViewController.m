@@ -12,6 +12,8 @@
 #import "DatepickerViewController.h"
 #import "MyTableViewController.h"
 #import "AlumniNearByViewController.h"
+#import "LocationPickerController.h"
+#import <SVProgressHUD.h>
 
 @interface AlumniSearchViewController ()
 @property (strong ,nonatomic) NSString *Name;
@@ -34,8 +36,8 @@ int selectedIndex;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [footer_View setBackgroundColor:BLUE_HEADER];
-    ListData = @[@"Name",@"Industry",@"Company",@"Degree",@"School Name",@"Year", @"Location"];
-    self.selectedData = [[NSMutableArray alloc] initWithObjects:@"",@"all",@"all",@"all",@"all",@"", @"all", nil];
+    ListData = @[@"Name",@"Industry",@"Degree",@"School Name",@"Year", @"Location"];
+    self.selectedData = [[NSMutableArray alloc] initWithObjects:@"",@"all",@"all",@"all",@"", @"all", nil];
     // Do any additional setup after loading the view.
 }
 
@@ -45,9 +47,6 @@ int selectedIndex;
 }
 
 #pragma mark - Table view data source
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return  roundf( ([[UIScreen mainScreen] bounds].size.height - 123.0f )/ [ListData count]) ;
-}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -66,7 +65,7 @@ int selectedIndex;
     cell.cellCatagoryText.text = ListData[indexPath.row];
     cell.cellSelectedText.text = self.selectedData[indexPath.row];
     cell.cellCatagoryText.textColor=BLUE_LIGHT_Color;
-    if(indexPath.row == 1 || indexPath.row ==2 || indexPath.row ==6){
+    if(indexPath.row == 1 || indexPath.row ==2 || indexPath.row ==5){
         
     }else{
         cell.cellImage.image = nil;
@@ -83,9 +82,9 @@ int selectedIndex;
     
     selectedIndex = (int)indexPath.row;
     
-    if (indexPath.row == 5) {
+    if (indexPath.row == 4) {
         [self performSegueWithIdentifier:@"SEARCH_DATA_DATE_SEGUE" sender:self];
-    }else if(indexPath.row == 6){
+    }else if(indexPath.row == 5){
         [self performSegueWithIdentifier:@"SEARCH_LOCATION_SEGUE" sender:self];
     }else {
         [self performSegueWithIdentifier:@"SEARCH_DATA_TEXT_SEGUE" sender:self];
@@ -108,6 +107,12 @@ int selectedIndex;
         //vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
         vc.is_search_segue = YES;
         vc.PFObjectList = self.PfObjectList;
+    }else if ([segue.identifier isEqualToString:@"SEARCH_LOCATION_SEGUE"]){
+        
+        LocationPickerController *vc = [segue destinationViewController];
+        //vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
+        vc.is_from_search = YES;
+        //vc.PFObjectList = self.PfObjectList;
     }
     
 
@@ -119,17 +124,17 @@ int selectedIndex;
     if ([unwindSegue.sourceViewController isKindOfClass:[searchDataSetViewController class]]) {
         searchDataSetViewController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
-        if (![SDSViewConroller.hintSet isEqualToString:@""]) {
+        //if (![SDSViewConroller.hintSet isEqualToString:@""]) {
             self.cellSelected.cellSelectedText.text = SDSViewConroller.hintSet;
             
             [self.selectedData replaceObjectAtIndex:selectedIndex withObject:SDSViewConroller.hintSet];
-        }
+        //}
     }
     else if ([unwindSegue.sourceViewController isKindOfClass:[DatepickerViewController class]])
     {
         DatepickerViewController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
-        if (![SDSViewConroller.starthintSet isEqualToString:@""]) {
+        //if (![SDSViewConroller.starthintSet isEqualToString:@""]) {
             NSString *dates = [SDSViewConroller.starthintSet stringByAppendingString:@"-"];
             dates = [dates stringByAppendingString:SDSViewConroller.endhintSet];
             
@@ -137,15 +142,22 @@ int selectedIndex;
             
             [self.selectedData replaceObjectAtIndex:selectedIndex withObject:dates];
             
-        }
-    }else if ([unwindSegue.sourceViewController isKindOfClass:[MyTableViewController class]]) {
-        MyTableViewController *SDSViewConroller = unwindSegue.sourceViewController;
+       // }
+    }
+    else if ([unwindSegue.sourceViewController isKindOfClass:[LocationPickerController class]]) {
+        LocationPickerController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
-        if (![SDSViewConroller.name isEqualToString:@""]) {
-            self.cellSelected.cellSelectedText.text = SDSViewConroller.name;
-            [self.selectedData replaceObjectAtIndex:selectedIndex withObject:SDSViewConroller.name];
+        if (SDSViewConroller.dataOfLocation)
+        {
+            NSDictionary *allData = SDSViewConroller.dataOfLocation;
+            NSString *address = [allData objectForKey:@"LocationString"];
+            double lat = [[allData objectForKey:@"Latitude"] doubleValue];
+            double lon = [[allData objectForKey:@"Longitude"] doubleValue];
+            
+            self.cellSelected.cellSelectedText.text = [NSString stringWithFormat:@"Near \"%@\"", address];
+            [self.selectedData replaceObjectAtIndex:selectedIndex withObject:[PFGeoPoint geoPointWithLatitude:lat longitude:lon]];
         }
-        NSLog(@"helloo.....");
+
     }
     
 }
@@ -153,25 +165,37 @@ int selectedIndex;
 
 - (IBAction)searchAluminiByGivenFilters:(id)sender {
     
-    NSLog(@"Selected Data Filters = %@", self.selectedData);
+    [SVProgressHUD showWithStatus:@"Searching Alumni" maskType:SVProgressHUDMaskTypeClear];
     
     for (NSUInteger st=0; st<[self.selectedData count]; st++) {
         
-        if ([[self.selectedData objectAtIndex:st] isEqualToString:@"all"])
+        if ([[self.selectedData objectAtIndex:st] respondsToSelector:@selector(isEqualToString:)])
         {
-            [self.selectedData replaceObjectAtIndex:st withObject:@""];
+            if ([[self.selectedData objectAtIndex:st] isEqualToString:@"all"])
+            {
+                [self.selectedData replaceObjectAtIndex:st withObject:@""];
+            }
         }
     }
     
     [AluminiDataSearch loadAluminiDataForFilters:self.selectedData andCompletionBlock:^(NSArray *objects, NSError *error) {
         
-        NSLog(@"Objects = %@", objects);
-        if (objects) {
+        if ([objects count]) {
+            
             self.PfObjectList = objects;
             [self performSegueWithIdentifier:@"SEARCH_MAP_SEGUE" sender:self];
         }
-        
+        else if (error)
+        {
+            [SVProgressHUD showErrorWithStatus:@"Alumni not found" maskType:SVProgressHUDMaskTypeClear];
+        }
     }];
 
+}
+
+- (IBAction)resetAllFields:(id)sender {
+    
+    self.selectedData = [[NSMutableArray alloc] initWithObjects:@"",@"all",@"all",@"all",@"all",@"", @"all", nil];
+    [tableview reloadData];
 }
 @end
