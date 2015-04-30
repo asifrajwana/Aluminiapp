@@ -88,6 +88,8 @@
 		E0ADE2CE1AE00E0100415143 /* AlumniSearchCustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0ADE2CD1AE00E0000415143 /* AlumniSearchCustomCellTableViewCell.m */; };
 		E0B24AA41AE929DD0029C4CC /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B24AA31AE929DD0029C4CC /* MyTableViewController.m */; };
 		E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */; };
+		E0F6DA051AF27A0D00D75FAA /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F6DA041AF27A0D00D75FAA /* SettingTableViewCell.m */; };
+		E0F6DA081AF27AB500D75FAA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F6DA071AF27AB500D75FAA /* SettingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +212,10 @@
 		E0B24AA31AE929DD0029C4CC /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
 		E0CB18131AF0ED5700D0B318 /* AluminiDataSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AluminiDataSearch.h; sourceTree = "<group>"; };
 		E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AluminiDataSearch.m; sourceTree = "<group>"; };
+		E0F6DA031AF27A0D00D75FAA /* SettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewCell.h; sourceTree = "<group>"; };
+		E0F6DA041AF27A0D00D75FAA /* SettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewCell.m; sourceTree = "<group>"; };
+		E0F6DA061AF27AB500D75FAA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		E0F6DA071AF27AB500D75FAA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +454,7 @@
 		E0A5FA781ADBDD9A00B467D7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E0F6DA021AF279EF00D75FAA /* Setting */,
 				E0A502931AE6A9E10038306B /* UserProfile */,
 				E0AA71461AE11BD70083063C /* WebView */,
 				E0AA71421AE10C5A0083063C /* SocialNews */,
@@ -625,6 +632,17 @@
 			name = AluminiSearch;
 			sourceTree = "<group>";
 		};
+		E0F6DA021AF279EF00D75FAA /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				E0F6DA031AF27A0D00D75FAA /* SettingTableViewCell.h */,
+				E0F6DA041AF27A0D00D75FAA /* SettingTableViewCell.m */,
+				E0F6DA061AF27AB500D75FAA /* SettingViewController.h */,
+				E0F6DA071AF27AB500D75FAA /* SettingViewController.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -785,6 +803,7 @@
 				E08C960F1ADD25DD006FC7F3 /* OAPlaintextSignatureProvider.h in Sources */,
 				E0AB8EAD1ADFC71C00A58AFA /* CurrentLocation.m in Sources */,
 				E08C96101ADD25DD006FC7F3 /* OAProblem.h in Sources */,
+				E0F6DA051AF27A0D00D75FAA /* SettingTableViewCell.m in Sources */,
 				E08C96111ADD25DD006FC7F3 /* OARequestParameter.h in Sources */,
 				E08C96121ADD25DD006FC7F3 /* OAServiceTicket.h in Sources */,
 				E08C96131ADD25DD006FC7F3 /* OASignatureProviding.h in Sources */,
@@ -813,6 +832,7 @@
 				E0AA71451AE10C820083063C /* SocialNewsViewController.m in Sources */,
 				E08C95A61ADD1699006FC7F3 /* NSURL+Base.m in Sources */,
 				E08C95F21ADD16DB006FC7F3 /* OAuthLoginView.m in Sources */,
+				E0F6DA081AF27AB500D75FAA /* SettingViewController.m in Sources */,
 				E04DAADF1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m in Sources */,
 				E08C95E61ADD16DB006FC7F3 /* OAAttachment.m in Sources */,
 				E0A502961AE6AA000038306B /* UserProfileViewController.m in Sources */,

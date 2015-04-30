@@ -17,4 +17,5 @@
 @property (strong, nonatomic) NSString *fullUrl;
 @property (strong, nonatomic) NSURLRequest *requestObj;
 @property (strong,  nonatomic) NSString *tittle;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingView;
 @end

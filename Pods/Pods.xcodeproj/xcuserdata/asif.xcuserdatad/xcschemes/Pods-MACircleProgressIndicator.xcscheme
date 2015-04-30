@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D405C800C6982D3FF96F61DD"
+               BlueprintIdentifier = "9C55BE1753D90618D2F61B3B"
                BuildableName = "libPods-MACircleProgressIndicator.a"
                BlueprintName = "Pods-MACircleProgressIndicator"
                ReferencedContainer = "container:Pods.xcodeproj">

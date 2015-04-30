@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //self.fullUrl = @"http://www.facebook.com";
+    [self backButton];
     NSURL *url = [NSURL URLWithString:self.fullUrl];
     self.requestObj = [NSURLRequest requestWithURL:url];
     [self.webview loadRequest:self.requestObj];
@@ -35,7 +36,31 @@
     
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    
+    [self.loadingView setHidden:NO];
+    
+}
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.loadingView setHidden:YES];
+}
+
+-(void)backButton{
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *backBtnImage = [UIImage imageNamed:@"Untitled-1"]  ;
+    [backBtn setImage:backBtnImage forState:UIControlStateNormal];
+    //[backBtn setBackgroundImage:backBtnImage forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    backBtn.frame = CGRectMake(0, 0, 54, 30);
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn] ;
+    self.navigationItem.leftBarButtonItem = backButton;
+}
+
+- (void)goback
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 /*
 #pragma mark - Navigation
 

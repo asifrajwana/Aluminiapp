@@ -97,11 +97,11 @@ int selectedIndex;
         searchDataSetViewController *vc = [segue destinationViewController];
         
         // Pass any objects to the view controller here, like...
-        //vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
+        vc.hintSet = ListData[tableview.indexPathForSelectedRow.item];
     }else if ([segue.identifier isEqualToString:@"SEARCH_DATA_DATE_SEGUE"]){
         
         DatepickerViewController *vc = [segue destinationViewController];
-//        //vc.starthintSet = ListData[tableview.indexPathForSelectedRow.item];
+        vc.starthintSet = ListData[tableview.indexPathForSelectedRow.item];
     }else if ([segue.identifier isEqualToString:@"SEARCH_MAP_SEGUE"]){
         
         AlumniNearByViewController *vc = [segue destinationViewController];

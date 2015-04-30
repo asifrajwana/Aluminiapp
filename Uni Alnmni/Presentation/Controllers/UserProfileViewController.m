@@ -18,6 +18,9 @@
 
 @synthesize userpic,userAddress,userEmail,userName;
 
+NSDate *now;
+NSTimer *refreshTimer;
+
 - (void)set_data {
     // Do any additional setup after loading the view.
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -61,12 +64,13 @@
     userpic.clipsToBounds = YES;
     userpic.layer.borderWidth = 3.0f;
     userpic.layer.borderColor = [UIColor whiteColor].CGColor;
+    now = [NSDate date];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self set_data];
-    [self.logout_button setBackgroundColor:BLUE_HEADER];
+    [self.footer setBackgroundColor:BLUE_HEADER];
     
     
 }
@@ -168,6 +172,9 @@
             
             NSLog(@"data saved");
             
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Updated!" message:@"You latest LinkedIn info synced successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             
             
@@ -198,7 +205,33 @@
 
 - (IBAction)sync:(id)sender {
     
-    [self profileApiCall];
+    if (refreshTimer==nil) {
+        [self fireTimer];
+        //now = [NSDate date];
+        [self profileApiCall];
+    }
+    
+}
+
+- (BOOL) hasExpired:(NSDate*)myDate
+{
+    NSLog(@"%f",[myDate timeIntervalSinceNow]);
+    return [myDate timeIntervalSinceNow] < -120.f;
+}
+
+-(void)timeOut
+{
+    
+    [refreshTimer invalidate];
+    refreshTimer = nil;
+    
+    
+}
+
+-(void)fireTimer
+{
+    refreshTimer =  [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
+    
 }
 
 //-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -215,17 +248,5 @@
 //    return NO;
 //}
 
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

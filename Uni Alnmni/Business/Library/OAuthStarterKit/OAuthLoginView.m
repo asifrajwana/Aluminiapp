@@ -75,6 +75,7 @@
     
     self.requestToken = [[OAToken alloc] initWithHTTPResponseBody:responseBody];
     [self allowUserToLogin];
+    [activityIndicator stopAnimating];
 }
 
 - (void)requestTokenResult:(OAServiceTicket *)ticket didFail:(NSData *)error 
@@ -317,6 +318,11 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+- (IBAction)backButton:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (void)createSession{

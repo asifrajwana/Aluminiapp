@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "32416E4C9ED639103F625B06"
+               BlueprintIdentifier = "EDC3CCD1C3A29E533E3BBEDC"
                BuildableName = "libPods-MACachedImageView.a"
                BlueprintName = "Pods-MACachedImageView"
                ReferencedContainer = "container:Pods.xcodeproj">

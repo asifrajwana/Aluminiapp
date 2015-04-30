@@ -26,5 +26,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userEmail;
 @property (weak, nonatomic) IBOutlet UILabel *userAddress;
+@property (strong, nonatomic) IBOutlet UIView *footer;
 
 @end

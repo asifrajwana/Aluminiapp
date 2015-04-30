@@ -35,19 +35,20 @@
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6qR-6T-8Yg">
-                    <rect key="frame" x="230" y="405" width="20" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="20" id="5tU-id-Lbn"/>
-                        <constraint firstAttribute="height" constant="20" id="Oxm-iY-bMB"/>
-                    </constraints>
-                </activityIndicatorView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sign-in-Large---Default" translatesAutoresizingMaskIntoConstraints="NO" id="p8M-cl-zK6">
                     <rect key="frame" x="48" y="346" width="384" height="43"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="43" id="dUD-60-bGx"/>
                     </constraints>
                 </imageView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6qR-6T-8Yg">
+                    <rect key="frame" x="230" y="405" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="5tU-id-Lbn"/>
+                        <constraint firstAttribute="height" constant="20" id="Oxm-iY-bMB"/>
+                    </constraints>
+                    <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

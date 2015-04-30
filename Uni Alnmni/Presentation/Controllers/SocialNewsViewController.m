@@ -30,7 +30,7 @@ NSInteger row;
     addresses = [[NSMutableArray alloc] initWithObjects:
     @"https://twitter.com/bucknellu",
     @"https://www.facebook.com/BucknellU",
-    @"http://leadstech.com/projects/html/alumni/",
+    @"http://www.bucknell.edu/EventsManagement",
     @"https://www.linkedin.com/company/bucknell-university",nil];
     }
     // Do any additional setup after loading the view.
