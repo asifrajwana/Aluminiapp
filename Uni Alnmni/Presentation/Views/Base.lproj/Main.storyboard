@@ -1083,11 +1083,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bottomView" destination="Xhc-C1-F6e" id="8ih-k7-4eV"/>
-                        <outlet property="footer_view" destination="Xhc-C1-F6e" id="2ti-e9-DrP"/>
-                        <outlet property="mapViewAlumni" destination="VWa-jH-1Bc" id="VGy-tl-PE5"/>
-                        <outlet property="searchResultCounter" destination="fLC-h9-tUJ" id="Ngy-JD-HsZ"/>
-                        <outlet property="slider" destination="Cmc-5S-74e" id="s2D-JH-NZQ"/>
                         <segue destination="grD-MD-17r" kind="unwind" identifier="UNWIND_TO_LOGIN" unwindAction="unwindToLogInController:" id="XE0-G0-bhK"/>
                     </connections>
                 </viewController>
@@ -1273,8 +1268,8 @@
         <image name="settings" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AR2-rf-ZCq"/>
-        <segue reference="Q3g-7n-HmX"/>
+        <segue reference="Oob-W9-fjc"/>
+        <segue reference="G2E-fc-QNP"/>
         <segue reference="Ttn-J9-xHo"/>
         <segue reference="wh3-m7-89m"/>
     </inferredMetricsTieBreakers>

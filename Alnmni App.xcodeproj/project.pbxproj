@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C4E61101920E2689BDEB5C48 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DDDC40BF3AC8C53086728A5 /* libPods.a */; };
 		E04DAADF1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E04DAADE1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m */; };
 		E06D6D491AF222530013E1C9 /* AluminiSearchResultsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06D6D481AF222530013E1C9 /* AluminiSearchResultsTableController.m */; };
 		E06D6D4C1AF2551F0013E1C9 /* AluminiAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E06D6D4B1AF2551F0013E1C9 /* AluminiAnnotation.m */; };
@@ -92,7 +91,7 @@
 		E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CB18141AF0ED5700D0B318 /* AluminiDataSearch.m */; };
 		E0F6DA051AF27A0D00D75FAA /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F6DA041AF27A0D00D75FAA /* SettingTableViewCell.m */; };
 		E0F6DA081AF27AB500D75FAA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F6DA071AF27AB500D75FAA /* SettingViewController.m */; };
-
+		EDAB8FC5511BA946B797ACCC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DDDC40BF3AC8C53086728A5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,7 +222,6 @@
 		E0F6DA041AF27A0D00D75FAA /* SettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewCell.m; sourceTree = "<group>"; };
 		E0F6DA061AF27AB500D75FAA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		E0F6DA071AF27AB500D75FAA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +236,7 @@
 				E08C95FE1ADD23FB006FC7F3 /* UIKit.framework in Frameworks */,
 				E08C95FC1ADD239C006FC7F3 /* SystemConfiguration.framework in Frameworks */,
 				E08C95FA1ADD2390006FC7F3 /* CFNetwork.framework in Frameworks */,
-				C4E61101920E2689BDEB5C48 /* libPods.a in Frameworks */,
+				EDAB8FC5511BA946B797ACCC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,8 +581,6 @@
 		E0A7387B1ADEAA7C00888CFE /* AlumniNearBy */ = {
 			isa = PBXGroup;
 			children = (
-				E0CE96F91AF114CC00201AF0 /* AlumniNearByViewController.h */,
-				E0CE96FA1AF114CC00201AF0 /* AlumniNearByViewController.m */,
 				E06D6D471AF222530013E1C9 /* AluminiSearchResultsTableController.h */,
 				E06D6D481AF222530013E1C9 /* AluminiSearchResultsTableController.m */,
 				E06D6D4A1AF2551F0013E1C9 /* AluminiAnnotation.h */,
@@ -708,7 +704,7 @@
 				TargetAttributes = {
 					E0A5FA4A1ADBDB1500B467D7 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = Q53Z7T2ECL;
+						DevelopmentTeam = 73DK7G23Z7;
 					};
 					E0A5FA631ADBDB1500B467D7 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -807,7 +803,6 @@
 				E08C96081ADD25DD006FC7F3 /* OAAtachmentF.h in Sources */,
 				E0CB18151AF0ED5700D0B318 /* AluminiDataSearch.m in Sources */,
 				E08C96091ADD25DD006FC7F3 /* OAAttachment.h in Sources */,
-				E0CE96FB1AF114CC00201AF0 /* AlumniNearByViewController.m in Sources */,
 				E08C960A1ADD25DD006FC7F3 /* OACall.h in Sources */,
 				E0B24AA41AE929DD0029C4CC /* MyTableViewController.m in Sources */,
 				E08C960B1ADD25DD006FC7F3 /* OAConsumer.h in Sources */,
