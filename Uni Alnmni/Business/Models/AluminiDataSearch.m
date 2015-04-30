@@ -13,7 +13,7 @@
 +(void)loadAluminiDataForFilters:(NSArray *)filters andCompletionBlock:(void (^)(NSArray *, NSError *))completionBlock
 {
     
-    NSArray *categories = [NSArray arrayWithObjects:@"Name",@"industry",@"company",@"degree",@"schoolName",@"Date",@"locationName", nil];
+    NSArray *categories = [NSArray arrayWithObjects:@"Name",@"industry",@"degree",@"schoolName",@"Date",@"locationName", nil];
     
     // apply category filter
     if ( [filters count])
@@ -48,7 +48,6 @@
                         [queries addObject:lastNameQuery];
                     }
                     
-
                     aluminiQuery = [PFQuery orQueryWithSubqueries:queries];
                 }
                 else
@@ -57,13 +56,21 @@
                 }
             
             }
-            else if (i==1 || i==2 || i==6)
+            else if (i==1 || i==2)
             {
                 if ([[filters objectAtIndex:i] length])
                 {
                     [aluminiQuery whereKey:[categories objectAtIndex:i] matchesRegex:[filters objectAtIndex:i] modifiers:@"i"];
                 }
             }
+            else if (i==6)
+            {
+                if (![[filters objectAtIndex:i] respondsToSelector:@selector(length)])
+                {
+                    [aluminiQuery whereKey:@"coordinates" nearGeoPoint:[filters objectAtIndex:i] withinMiles:10.0];
+                }
+            }
+            
             else
             {
                 if ([[filters objectAtIndex:i] length])
@@ -73,15 +80,19 @@
                         NSArray *dates = [[filters objectAtIndex:i] componentsSeparatedByString:@"-"];
                         
                         if ([dates objectAtIndex:0]) {
-                            PFQuery *innerQuery = [PFQuery queryWithClassName:@"Education"];
-                            [innerQuery whereKey:@"startDate" equalTo:[NSNumber numberWithInt:[[dates objectAtIndex:0] intValue]]];
-                            [aluminiQuery whereKey:@"userEducation" matchesQuery:innerQuery];
+                            if (![[dates objectAtIndex:0] isEqualToString:@"start"]) {
+                                PFQuery *innerQuery = [PFQuery queryWithClassName:@"Education"];
+                                [innerQuery whereKey:@"startDate" equalTo:[NSNumber numberWithInt:[[dates objectAtIndex:0] intValue]]];
+                                [aluminiQuery whereKey:@"userEducation" matchesQuery:innerQuery];
+                            }
                         }
                         
                         if ([dates count] > 1 && [dates objectAtIndex:1]) {
+                            if (![[dates objectAtIndex:1] isEqualToString:@"end"]) {
                             PFQuery *innerQuery = [PFQuery queryWithClassName:@"Education"];
                             [innerQuery whereKey:@"endDate" equalTo:[NSNumber numberWithInt:[[dates objectAtIndex:1] intValue]]];
                             [aluminiQuery whereKey:@"userEducation" matchesQuery:innerQuery];
+                            }
                         }
                     }
                     else
@@ -92,6 +103,7 @@
                     }
                 }
             }
+            
         }
         
         [aluminiQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
@@ -102,5 +114,21 @@
     }
 
 }
+
++(void)loadEducationDataForObject:(PFObject *)object andCompletionBlock:(void (^)(PFObject *, NSError *))completionBlock
+{
+    PFRelation *relation = [object relationForKey:@"userEducation"];
+    PFQuery *userEducationQuery = [relation query];
+    [userEducationQuery orderByDescending:@"startDate"];
+    
+    
+    [userEducationQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object2, NSError *error) {
+        
+        completionBlock(object2, error);
+        
+    }];
+}
+
+
 
 @end

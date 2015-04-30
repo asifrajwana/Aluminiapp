@@ -7,10 +7,13 @@
 //
 
 #import "AlumniNearByViewController.h"
+#import "AluminiDataSearch.h"
 #import <Parse/Parse.h>
+#import "AluminiAnnotation.h"
+#import <SVProgressHUD.h>
 
 #define MINIMUM_ZOOM_ARC 0.05 //approximately 1 miles (1 degree of arc ~= 69 miles)
-#define ANNOTATION_REGION_PAD_FACTOR 2.00
+#define ANNOTATION_REGION_PAD_FACTOR 2.50
 #define MAX_DEGREES_ARC 360
 
 @interface AlumniNearByViewController ()
@@ -33,23 +36,28 @@ MKCoordinateRegion region;
     // Do any additional setup after loading the view.
     isLocation = NO;
     isSearch = NO;
-
+    
+    
+    _resultsTableController = [[AluminiSearchResultsTableController alloc] init];
+    _searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
+    [self.searchController.searchBar sizeToFit];
+    self.navigationItem.titleView = self.searchController.searchBar;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
+    _resultsTableController.tableView.delegate = self;
+    self.searchController.delegate = self;
+    self.searchController.searchBar.delegate = self;
+    self.definesPresentationContext = YES;
     
     [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor grayColor]];
     [self.footer_view setBackgroundColor:BLUE_HEADER];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor blackColor]];
     
-    [self.searchDisplayController setDelegate:self];
-    
-    self.searchBar.delegate = self;
-    
+    [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
     self.mapViewAlumni.delegate = self;
 
     self.slider.minimumValue = 0.1;
     self.slider.maximumValue = 1.0;
     self.slider.value  = 0.1;
-    
-    [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
     
     if(self.is_login_segue)
     {
@@ -70,30 +78,30 @@ MKCoordinateRegion region;
     
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-        [self showAllOnMap:self.PFObjectList];
+        [self loadEducationDetails:self.PFObjectList];
     
     }
     else
     {
-    
+        [SVProgressHUD showWithStatus:@"Finding Nearby Alumni" maskType:SVProgressHUDMaskTypeClear];
         self.geocoder = [[CLGeocoder alloc] init];
         [self getUserCurrentLocation];
     }
-    
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
-    //[self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
-    /*MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    annotation.coordinate = location.coordinate;
-    //annotation.title      = item.name;
-    //annotation.subtitle   = item.placemark.title;
-    [self.mapViewAlumni addAnnotation:annotation];*/
-    //[self.mapViewAlumni setRegion:self.boundingRegion animated:YES];
+    if (self.searchControllerWasActive) {
+        self.searchController.active = self.searchControllerWasActive;
+        _searchControllerWasActive = NO;
+        
+        if (self.searchControllerSearchFieldWasFirstResponder) {
+            [self.searchController.searchBar becomeFirstResponder];
+            _searchControllerSearchFieldWasFirstResponder = NO;
+        }
+    }
 }
-
-//CLLocationDegrees
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -102,22 +110,16 @@ MKCoordinateRegion region;
 - (IBAction)zoomInOutSlider:(UISlider *)sender {
     
     region.span.latitudeDelta = 1*(1.001-slider.value)+0.001;
-    NSLog(@"%f",region.span.latitudeDelta);
     region.span.longitudeDelta = 0.001;
     region.center=mapViewAlumni.centerCoordinate;
     [mapViewAlumni setRegion:region animated:TRUE];
-    
 }
-//- (IBAction)leftBarDone:(id)sender {
-//    if(self.is_login_segue){
-//        [self performSegueWithIdentifier:@"UNWIND_TO_LOGIN" sender:nil];
-//
-//    }
-//}
 
--(IBAction) Done {
-    if(self.is_login_segue){
-        [self performSegueWithIdentifier:@"UNWIND_TO_LOGIN" sender:nil];
+-(IBAction) Done
+{
+    if(self.is_login_segue)
+    {
+
         
     }
 }
@@ -203,14 +205,17 @@ MKCoordinateRegion region;
     manager.delegate = nil;
     
     if(!self.is_login_segue && !self.is_search_segue){
-        [self getUsersNearMyLocation:currLocation];
+        [self getUsersNearMyLocation:currLocation withInKM:200.0];
+    }
+    else if (self.is_login_segue)
+    {
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currLocation.coordinate, 700, 700);
+         [self.mapViewAlumni setRegion:[self.mapViewAlumni regionThatFits:region] animated:YES];
+         self.mapViewAlumni.showsUserLocation = YES;
+         isLocation = NO;
+         
     }
     
-    /*MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currLocation.coordinate, 700, 700);
-    [self.mapViewAlumni setRegion:[self.mapViewAlumni regionThatFits:region] animated:YES];
-    self.mapViewAlumni.showsUserLocation = YES;
-    isLocation = NO;
-    */
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
@@ -226,34 +231,37 @@ MKCoordinateRegion region;
 #pragma mark MKMapView Delegate implementation
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
     
-    if (!isSearch && !isLocation) {
-        NSLog(@"Called Region Change");
+    if (!isSearch && !isLocation)
+    {
         [self reverseGeocodeAndDisplayCenterOfMap];
     }
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    static NSString *defaultPinID = @"Pin";
-    MKAnnotationView *pinView = nil;
-    pinView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
-    if ( pinView == nil )
-        pinView = [[MKAnnotationView alloc]
-                   initWithAnnotation:annotation reuseIdentifier:defaultPinID];
     
-    pinView.enabled = YES;
-    pinView.canShowCallout = YES;
+    if([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;
+    else if ([annotation isKindOfClass:[AluminiAnnotation class]])
+    {
+        NSString *annotationIdentifier = @"CustomViewAnnotation";
+        MKAnnotationView* annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+        if(!annotationView)
+        {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+                                                          reuseIdentifier:annotationIdentifier];
+        }
+        annotationView.image = [UIImage imageNamed:@"pin_e"];
+        annotationView.canShowCallout= YES;
+        annotationView.enabled = YES;
+        
+        return annotationView;
+    }
+    return nil;
+}
 
-    if(annotation != mapView.userLocation)
-    {
-        pinView.image = [UIImage imageNamed:@"pin_e"];
-    }
-    else
-    {
-        self.mapViewAlumni.showsUserLocation = YES;
-        pinView.image = [UIImage imageNamed:@"pin_a"];
-    }
-    return pinView;
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
     
 }
 
@@ -442,15 +450,12 @@ MKCoordinateRegion region;
     }];
 }
 
-
 - (void)startSearch:(NSString *)searchString
 {
     if (self.localSearch.searching)
     {
         [self.localSearch cancel];
     }
-    
-    //self.locationLabel.text = nil;
     
     [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
     
@@ -480,16 +485,17 @@ MKCoordinateRegion region;
         }
         else
         {
-            //[self hideActivity];
             self.boundingRegion = response.boundingRegion;
             
             if (response.mapItems.count==0) {
-                //self.locationLabel.text = @"No matching result found";
+                
             }
             else
             {
                 self.places = response.mapItems;
-                [self.searchDisplayController.searchResultsTableView reloadData];
+                AluminiSearchResultsTableController *tableController = (AluminiSearchResultsTableController *)self.searchController.searchResultsController;
+                tableController.filteredAlumini = self.places;
+                [tableController.tableView reloadData];
             }
         }
         
@@ -508,58 +514,34 @@ MKCoordinateRegion region;
 }
 
 
-- (void) setAndAddAnnotation : (CLLocationCoordinate2D) Cordinate
+- (void) setAndAddAnnotation : (CLLocationCoordinate2D) Cordinate andAluminiName : (NSString *) nameOfPerson
 {
-
+    /*
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     annotation.coordinate = Cordinate;
-    //annotation.title      = item.name;
-    //annotation.subtitle   = item.placemark.title;
     [self.mapViewAlumni addAnnotation:annotation];
-    //[self.mapViewAlumni setRegion:self.boundingRegion animated:YES];
-    //isSearch = NO;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.places count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    */
     
-    static NSString *IDENTIFIER = @"SearchResultsCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IDENTIFIER];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:IDENTIFIER];
-    }
-    
-    MKMapItem *item = self.places[indexPath.row];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = item.name;
-    NSLog(@"Details = %@", item.placemark.addressDictionary);
-    NSArray *address = [item.placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
-    
-    NSString *addressString = @"";
-    
-    for (NSString *add in address) {
-        addressString = [addressString stringByAppendingString:add];
-        if (add != [address lastObject]) {
-            addressString = [addressString stringByAppendingString:@", "];
-        }
-    }
-    
-    cell.detailTextLabel.text = addressString;
-    
-    return cell;
+    AluminiAnnotation *ann = [[AluminiAnnotation alloc] initWithCoordinate:Cordinate andTitle:nameOfPerson] ;
+    [self.mapViewAlumni addAnnotation:ann];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self.searchDisplayController setActive:NO animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    [self.searchController setActive:NO];
+    
     MKMapItem *firstItem = self.places[indexPath.row];
-    [self setAndAddAnnotation:firstItem.placemark.location.coordinate];
     self.mapitem = firstItem;
     self.location = self.mapitem.placemark.location;
+    [self getUsersNearMyLocation:self.location withInKM:10.0];
+    
+    /*
+    [self setAndAddAnnotation:firstItem.placemark.coordinate andAluminiName:firstItem.placemark.name];
+    [self.mapViewAlumni setRegion:self.boundingRegion animated:YES];
+
     
     NSArray *adAra = [firstItem.placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
     NSString *name;
@@ -631,73 +613,82 @@ MKCoordinateRegion region;
             }
         }
     }
-    
+    */
 }
 
--(void)getUsersNearMyLocation : (CLLocation *) locationOfCurUser
+- (void) allAluminiUsers : (NSUInteger ) from
 {
-    /*[self.geocoder reverseGeocodeLocation:locationOfCurUser
-                        completionHandler:^(NSArray *placemarks, NSError *error) {
-                            if (error) {
-                                NSLog(@"error find here was %@",error);
-                            }
-                            
-                            //self.doneButton.hidden = YES;
-                            
-                            if ( !error && [placemarks count] > 0)
-                            {
-                                MKPlacemark *firstPlace = [placemarks firstObject];
-                                NSLog(@"name = %@", [self niceNameForPlacemark:firstPlace]);
-                                self.location = firstPlace.location;
-                                [self setAndAddAnnotation:self.location.coordinate];
-                                //NSString *locationText = [self niceNameForPlacemark:firstPlace];
-                                //self.locationLabel.text = locationText;
-                            }
-                            
-                        }];*/
+    PFQuery *qu = [PFQuery queryWithClassName:@"LinkedInUser"];
+   [qu countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
     
+       self.searchResultCounter.text = [NSString stringWithFormat:@"Showing %lu out of %i", (unsigned long)from, number];
+   }];
+}
+
+
+- (void)loadEducationDetails:(NSArray *)userObjects
+{
+    [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
     
+    [self allAluminiUsers:[userObjects count]];
+    
+        self.PFObjectList = userObjects;
+        [self showAllOnMap:userObjects];
+        
+        NSMutableDictionary *educationObjects = [[NSMutableDictionary alloc] init];
+        
+        __block NSUInteger count = 0;
+        
+        for (PFObject *objCur in userObjects)
+        {
+            
+            PFRelation *relation = [objCur relationForKey:@"userEducation"];
+            PFQuery *userEducationQuery = [relation query];
+            [userEducationQuery orderByDescending:@"startDate"];
+            
+            [userEducationQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                
+                count ++;
+                
+                if (object)
+                {
+                    [educationObjects setObject:object forKey:objCur.objectId];
+                }
+                else
+                {
+                    [educationObjects setObject:@"" forKey:objCur.objectId];
+                }
+                
+                if (count==[userObjects count])
+                {
+                    self.educationData = educationObjects;
+                    
+                    [SVProgressHUD showSuccessWithStatus:@"Alumni found successfully" maskType:SVProgressHUDMaskTypeClear];
+                    
+                }
+                
+            }];
+        }
+}
+
+-(void)getUsersNearMyLocation : (CLLocation *) locationOfCurUser withInKM : (double) kilomiters
+{
     PFQuery *query = [PFQuery queryWithClassName:@"LinkedInUser"];
-    [query whereKey:@"coordinates" nearGeoPoint:[PFGeoPoint geoPointWithLocation:locationOfCurUser] withinKilometers:100.0];
+    [query whereKey:@"coordinates" nearGeoPoint:[PFGeoPoint geoPointWithLocation:locationOfCurUser] withinKilometers:kilomiters];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *userObjects, NSError *error)
     {
-        
-        [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
-        
-        if ([userObjects count]) {
-            
-            self.PFObjectList = userObjects;
-            [self showAllOnMap:userObjects];
-            
-            
-            NSMutableArray *educationObjects = [[NSMutableArray alloc] init];
-            
-            for (PFObject *obj in userObjects) {
-                
-                PFRelation *relation = [obj relationForKey:@"userEducation"];
-                PFQuery *userEducationQuery = [relation query];
-                [userEducationQuery orderByDescending:@"startDate"];
-                
-                [userEducationQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                   
-                    if (object)
-                    {
-                        [educationObjects addObject:object];
-                    
-                        self.PFObjectListEducationData = educationObjects;
-                    }
-                    else if (error)
-                    {
-                        [educationObjects addObject:@""];
-                    }
-                }];
-            }
-            
+        if ([userObjects count])
+        {
+            [self loadEducationDetails:userObjects];
         }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"No Alumni found near you" maskType:SVProgressHUDMaskTypeClear];
+        }
+
         
     }];
-
 }
 
 -(void)showAllOnMap : (NSArray *) ObjectsUsers
@@ -706,7 +697,7 @@ MKCoordinateRegion region;
     {
         PFGeoPoint *objGeoPoint = obj[@"coordinates"];
         
-        [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude)];
+        [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude) andAluminiName:[NSString stringWithFormat:@"%@ %@",obj[@"firstName"],obj[@"lastName"]]];
     }
     
     [self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
@@ -715,11 +706,18 @@ MKCoordinateRegion region;
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"MAP_LIST_SEGUE"]) {
         SocialNewsViewController *vc = [segue destinationViewController];
-        
-        // Pass any objects to the view controller here, like...
+        vc.navigationItem.title = @"Alumini List";
         vc.is_map_list = YES;
         vc.mapUserList = self.PFObjectList;
-        vc.mapUserListData = self.PFObjectListEducationData;
+        
+        NSMutableArray *educat = [[NSMutableArray alloc] init];
+        
+        for (PFObject *olu in self.PFObjectList)
+        {
+            [educat addObject:[self.educationData objectForKey:olu.objectId]];
+        }
+        
+        vc.mapUserListData = educat;
     }
 
 }
@@ -727,26 +725,47 @@ MKCoordinateRegion region;
 - (IBAction)unwindToAlumniNearByController:(UIStoryboardSegue *)unwindSegue{
     if ([unwindSegue.sourceViewController isKindOfClass:[SocialNewsViewController class]]) {
         SocialNewsViewController *vc = unwindSegue.sourceViewController;
-        //if (vc.row !=nil) {
-        NSLog(@"Row = %i", vc.row);
+
             PFObject *obj = [self.PFObjectList objectAtIndex:vc.row];
             PFGeoPoint *objGeoPoint = obj[@"coordinates"];
             [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
-            [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude)];
+        [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude) andAluminiName:[NSString stringWithFormat:@"%@ %@",obj[@"firstName"],obj[@"lastName"]]];
             [self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
-        
-        //}
     }
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UIStateRestoration
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+NSString *const ViewControllerTitleKey = @"ViewControllerTitleKey";
+NSString *const SearchControllerIsActiveKey = @"SearchControllerIsActiveKey";
+NSString *const SearchBarTextKey = @"SearchBarTextKey";
+NSString *const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
+    [super encodeRestorableStateWithCoder:coder];
+    
+    [coder encodeObject:self.title forKey:ViewControllerTitleKey];
+    
+    UISearchController *searchController = self.searchController;
+    
+    BOOL searchDisplayControllerIsActive = searchController.isActive;
+    [coder encodeBool:searchDisplayControllerIsActive forKey:SearchControllerIsActiveKey];
+    
+    if (searchDisplayControllerIsActive) {
+        [coder encodeBool:[searchController.searchBar isFirstResponder] forKey:SearchBarIsFirstResponderKey];
+    }
+
+    [coder encodeObject:searchController.searchBar.text forKey:SearchBarTextKey];
 }
-*/
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
+    
+    [super decodeRestorableStateWithCoder:coder];
+    self.title = [coder decodeObjectForKey:ViewControllerTitleKey];
+    _searchControllerWasActive = [coder decodeBoolForKey:SearchControllerIsActiveKey];
+    _searchControllerSearchFieldWasFirstResponder = [coder decodeBoolForKey:SearchBarIsFirstResponderKey];
+    self.searchController.searchBar.text = [coder decodeObjectForKey:SearchBarTextKey];
+}
+
 
 @end

@@ -102,7 +102,7 @@
                         <outlet property="footer_view" destination="eyq-EG-XWA" id="pMH-Xj-Gcf"/>
                         <outlet property="loader" destination="B3X-N3-0rR" id="lnh-XY-Mb8"/>
                         <segue destination="7aA-NG-CCi" kind="show" identifier="Homescreen" id="Yif-OF-jf7"/>
-                        <segue destination="Jx1-rc-CoT" kind="show" identifier="GETTING_CURRENT_LOCATION" id="VBh-0T-Qxz"/>
+                        <segue destination="8HG-m3-mNj" kind="show" identifier="GETTING_CURRENT_LOCATION" id="Oob-W9-fjc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -148,6 +148,16 @@
                                         </state>
                                         <connections>
                                             <action selector="searchAluminiByGivenFilters:" destination="Ui2-h8-ME2" eventType="touchUpInside" id="CKo-yU-OKz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oz6-lb-Rb1">
+                                        <rect key="frame" x="8" y="0.0" width="60" height="60"/>
+                                        <state key="normal" title="Reset">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resetAllFields:" destination="Ui2-h8-ME2" eventType="touchUpInside" id="ovE-sP-uJ6"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -246,8 +256,8 @@
                         <outlet property="tableview" destination="o5j-d4-470" id="AYj-dB-Qa7"/>
                         <segue destination="3TP-fY-SrJ" kind="push" identifier="SEARCH_DATA_TEXT_SEGUE" id="Kg2-WR-ikA"/>
                         <segue destination="rLL-V0-BKu" kind="push" identifier="SEARCH_DATA_DATE_SEGUE" id="rqy-jy-BTa"/>
-                        <segue destination="Yd9-sm-8Tf" kind="push" identifier="SEARCH_LOCATION_SEGUE" id="vNJ-Jl-VPY"/>
                         <segue destination="Jx1-rc-CoT" kind="push" identifier="SEARCH_MAP_SEGUE" id="Q3g-7n-HmX"/>
+                        <segue destination="8HG-m3-mNj" kind="show" identifier="SEARCH_LOCATION_SEGUE" id="AR2-rf-ZCq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ak-59-jlz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -862,7 +872,7 @@
             </objects>
             <point key="canvasLocation" x="2277" y="423"/>
         </scene>
-        <!--Alumni Near By-->
+        <!--Alumni Near By View Controller-->
         <scene sceneID="g8Y-Dy-H0F">
             <objects>
                 <viewController id="Jx1-rc-CoT" customClass="AlumniNearByViewController" sceneMemberID="viewController">
@@ -891,7 +901,7 @@
                                             <segue destination="58S-XI-YXO" kind="push" identifier="MAP_LIST_SEGUE" id="Ttn-J9-xHo"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 of 532 results shown" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLC-h9-tUJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLC-h9-tUJ">
                                         <rect key="frame" x="8" y="0.0" width="516" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="DOR-9d-vrr"/>
@@ -923,18 +933,10 @@
                                     <action selector="zoomInOutSlider:" destination="Jx1-rc-CoT" eventType="valueChanged" id="4vt-cv-XEE"/>
                                 </connections>
                             </slider>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="CvC-tb-N4l">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Jx1-rc-CoT" id="Hjq-a7-8Gm"/>
-                                </connections>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VWa-jH-1Bc" firstAttribute="top" secondItem="E7F-Wb-s9h" secondAttribute="topMargin" id="2Ud-rL-4MI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CvC-tb-N4l" secondAttribute="trailing" constant="-16" id="4RL-Jb-Zrd"/>
                             <constraint firstItem="Xhc-C1-F6e" firstAttribute="leading" secondItem="E7F-Wb-s9h" secondAttribute="leadingMargin" constant="-16" id="ILW-MM-3GP"/>
                             <constraint firstItem="Cmc-5S-74e" firstAttribute="leading" secondItem="E7F-Wb-s9h" secondAttribute="leadingMargin" constant="27" id="PNh-IB-Igl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VWa-jH-1Bc" secondAttribute="trailing" constant="-16" id="QLh-nD-6Vh"/>
@@ -944,11 +946,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Cmc-5S-74e" secondAttribute="trailing" constant="27" id="eE6-fY-2Oa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xhc-C1-F6e" secondAttribute="trailing" constant="-16" id="gq9-av-fVL"/>
                             <constraint firstItem="Xhc-C1-F6e" firstAttribute="top" secondItem="VWa-jH-1Bc" secondAttribute="bottom" constant="4" id="r9E-3t-4U7"/>
-                            <constraint firstItem="CvC-tb-N4l" firstAttribute="top" secondItem="rRY-ub-Sbq" secondAttribute="bottom" id="uB7-Pf-sbh"/>
-                            <constraint firstItem="CvC-tb-N4l" firstAttribute="leading" secondItem="E7F-Wb-s9h" secondAttribute="leadingMargin" constant="-16" id="v6z-Jk-dwu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Alumni Near By" id="cUN-aC-2ZC">
+                    <navigationItem key="navigationItem" id="cUN-aC-2ZC">
                         <barButtonItem key="leftBarButtonItem" image="ico-to-do-list" id="Yxe-AH-Zuf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -961,23 +961,13 @@
                         <outlet property="bottomView" destination="Xhc-C1-F6e" id="8ih-k7-4eV"/>
                         <outlet property="footer_view" destination="Xhc-C1-F6e" id="2ti-e9-DrP"/>
                         <outlet property="mapViewAlumni" destination="VWa-jH-1Bc" id="VGy-tl-PE5"/>
-                        <outlet property="searchBar" destination="CvC-tb-N4l" id="NX9-6d-abn"/>
-                        <outlet property="searchDisplayController" destination="rRd-Rr-js6" id="ItI-5F-YOa"/>
+                        <outlet property="searchResultCounter" destination="fLC-h9-tUJ" id="Ngy-JD-HsZ"/>
                         <outlet property="slider" destination="Cmc-5S-74e" id="s2D-JH-NZQ"/>
                         <segue destination="grD-MD-17r" kind="unwind" identifier="UNWIND_TO_LOGIN" unwindAction="unwindToLogInController:" id="XE0-G0-bhK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="phE-9C-vje" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="grD-MD-17r" userLabel="Exit" sceneMemberID="exit"/>
-                <searchDisplayController id="rRd-Rr-js6">
-                    <connections>
-                        <outlet property="delegate" destination="Jx1-rc-CoT" id="O6H-b5-ytd"/>
-                        <outlet property="searchBar" destination="CvC-tb-N4l" id="XA7-u6-HXF"/>
-                        <outlet property="searchContentsController" destination="Jx1-rc-CoT" id="VgR-jK-iNE"/>
-                        <outlet property="searchResultsDataSource" destination="Jx1-rc-CoT" id="JNn-Rc-wzf"/>
-                        <outlet property="searchResultsDelegate" destination="Jx1-rc-CoT" id="ESl-4k-5e9"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2960" y="-936"/>
         </scene>
@@ -1074,6 +1064,78 @@
             </objects>
             <point key="canvasLocation" x="5158" y="-250"/>
         </scene>
+        <!--Location Picker Controller-->
+        <scene sceneID="yp1-7D-OAK">
+            <objects>
+                <viewController id="8HG-m3-mNj" customClass="LocationPickerController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ty2-B0-ZGs"/>
+                        <viewControllerLayoutGuide type="bottom" id="J52-SH-zKl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hkL-9b-dYE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G49-rF-nRX">
+                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <color key="backgroundColor" red="0.093726979299999999" green="0.50093047660000001" blue="0.70920360329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="u36-Tk-vXq"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cc-Li-IaX">
+                                <rect key="frame" x="5" y="64" width="590" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="36" id="7Gr-0b-4Ny"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="grp-i4-ntX">
+                                <rect key="frame" x="290" y="72" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FaJ-0W-DLi">
+                                <rect key="frame" x="0.0" y="100" width="600" height="440"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2cc-Li-IaX" firstAttribute="top" secondItem="ty2-B0-ZGs" secondAttribute="bottom" id="EBX-wX-cDU"/>
+                            <constraint firstItem="FaJ-0W-DLi" firstAttribute="leading" secondItem="hkL-9b-dYE" secondAttribute="leadingMargin" constant="-16" id="F9e-LQ-Q27"/>
+                            <constraint firstItem="J52-SH-zKl" firstAttribute="top" secondItem="G49-rF-nRX" secondAttribute="bottom" id="H14-YD-Tj1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FaJ-0W-DLi" secondAttribute="trailing" constant="-16" id="IX3-ao-pj2"/>
+                            <constraint firstItem="G49-rF-nRX" firstAttribute="leading" secondItem="hkL-9b-dYE" secondAttribute="leadingMargin" constant="-16" id="J5l-Ay-wfW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="G49-rF-nRX" secondAttribute="trailing" constant="-16" id="Po6-7H-v8d"/>
+                            <constraint firstItem="grp-i4-ntX" firstAttribute="top" secondItem="ty2-B0-ZGs" secondAttribute="bottom" constant="8" id="TG4-xe-lVD"/>
+                            <constraint firstItem="FaJ-0W-DLi" firstAttribute="top" secondItem="hkL-9b-dYE" secondAttribute="topMargin" constant="100" id="Y4l-cW-b89"/>
+                            <constraint firstItem="FaJ-0W-DLi" firstAttribute="top" secondItem="2cc-Li-IaX" secondAttribute="bottom" id="adR-U2-Bo1"/>
+                            <constraint firstItem="G49-rF-nRX" firstAttribute="top" secondItem="FaJ-0W-DLi" secondAttribute="bottom" id="bK4-M7-Dvg"/>
+                            <constraint firstItem="2cc-Li-IaX" firstAttribute="leading" secondItem="hkL-9b-dYE" secondAttribute="leading" constant="5" id="gIJ-yK-zCO"/>
+                            <constraint firstAttribute="trailing" secondItem="2cc-Li-IaX" secondAttribute="trailing" constant="5" id="hGj-K6-ync"/>
+                            <constraint firstAttribute="centerX" secondItem="grp-i4-ntX" secondAttribute="centerX" id="nM0-uz-BgK"/>
+                            <constraint firstItem="FaJ-0W-DLi" firstAttribute="top" secondItem="grp-i4-ntX" secondAttribute="bottom" constant="8" id="pzu-ha-4Pd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="MDm-6h-fB7">
+                        <barButtonItem key="leftBarButtonItem" image="ico-to-do-list" id="6rd-8g-tA9">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="grp-i4-ntX" id="VT5-gK-abu"/>
+                        <outlet property="footer_view" destination="G49-rF-nRX" id="XY5-hB-qK5"/>
+                        <outlet property="locationLabel" destination="2cc-Li-IaX" id="o7q-sc-ikz"/>
+                        <outlet property="mapView" destination="FaJ-0W-DLi" id="WW4-d7-fr4"/>
+                        <segue destination="XZm-VW-qls" kind="unwind" identifier="UNWIND_TO_LOGIN" unwindAction="unwindToLogInController:" id="6a1-xN-yKD"/>
+                        <segue destination="XZm-VW-qls" kind="unwind" identifier="UNWIND_TO_SEARCH_FILTER" unwindAction="unwindToAlumniSearchController:" id="jgc-NT-K0d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mUw-el-ByO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XZm-VW-qls" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1812" y="-948"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Icon-72.png" width="72" height="72"/>
@@ -1085,8 +1147,9 @@
         <image name="linkedin_attribution" width="19" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G2E-fc-QNP"/>
-        <segue reference="l6h-M7-OG0"/>
-        <segue reference="o3T-C1-q09"/>
+        <segue reference="AR2-rf-ZCq"/>
+        <segue reference="Q3g-7n-HmX"/>
+        <segue reference="Ttn-J9-xHo"/>
+        <segue reference="wh3-m7-89m"/>
     </inferredMetricsTieBreakers>
 </document>

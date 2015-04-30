@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    enter_field_data.clearButtonMode = UITextFieldViewModeWhileEditing;
+
     hint.text = hintSet;
     [self.footer_View setBackgroundColor:BLUE_HEADER];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]

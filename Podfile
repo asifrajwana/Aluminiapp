@@ -4,3 +4,4 @@
 pod 'Parse', '~> 1.7'
 pod 'AFNetworking', '~> 2.5'
 pod 'MACachedImageView', :git => 'https://github.com/mattycas/MACachedImageView.git'
+pod 'SVProgressHUD', '~> 1.1'

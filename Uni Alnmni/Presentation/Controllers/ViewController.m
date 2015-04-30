@@ -10,7 +10,7 @@
 
 #import "CurrentLocation.h"
 #import <AFNetworking/AFNetworking.h>
-#import "AlumniNearByViewController.h"
+#import "LocationPickerController.h"
 
 
 @interface ViewController ()
@@ -132,7 +132,7 @@ UIAlertView *alertToEnableDeviceLocation;
     
         if ( json )
         {
-            NSLog(@"%@",userLoginToken);
+            NSLog(@"%@",json);
             
             PFQuery *query = [PFQuery queryWithClassName:@"LinkedInUser"];
             [query whereKey:@"email" equalTo:[json objectForKey:@"emailAddress"]];
@@ -208,14 +208,14 @@ UIAlertView *alertToEnableDeviceLocation;
                                                          self.geo_location = [PFGeoPoint geoPointWithLocation:self.location];
                                                      }else if (placemarks.count == count){
                                                      
-                                                         UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Your current location does not match to your LinkedIn address. Please search and select your location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                         UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"The map is unable to locate your LinkedIn Address. Please proceed to enter your location." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                                                          [chose_current_location show];
                                                          [self performSegueWithIdentifier:@"GETTING_CURRENT_LOCATION" sender:self];
                                                      }
                                                  }
                                              }else {
                                                  NSLog(@"Error : %@",error);
-                                                 UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Your current location does not match to your LinkedIn address. Please search and select your location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                 UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"The map is unable to locate your LinkedIn Address. Please proceed to enter your location." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                                                  [chose_current_location show];
                                                  [self performSegueWithIdentifier:@"GETTING_CURRENT_LOCATION" sender:self];
                                              }
@@ -223,13 +223,13 @@ UIAlertView *alertToEnableDeviceLocation;
                                          }];
                         }else {
                         
-                            UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Your LinkedIn address not found. Please search and select your current location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                            UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"The map is unable to locate your LinkedIn Address. Please proceed to enter your location." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                             [chose_current_location show];
                             [self performSegueWithIdentifier:@"GETTING_CURRENT_LOCATION" sender:self];
                         }
                         
                         if (self.geo_location != nil) {
-                            [self saveLinkedInUserOnParse:json];
+                            [self saveLinkedInUserOnParse:json andLocationData:nil];
                         }
                     
                     }
@@ -252,7 +252,8 @@ UIAlertView *alertToEnableDeviceLocation;
 
 #pragma mark pragma Save_LinkedIn_Data_On_Parse
 
--(void)saveLinkedInUserOnParse : (NSDictionary *) dataOfLinkedInUser {
+-(void)saveLinkedInUserOnParse : (NSDictionary *) dataOfLinkedInUser andLocationData : (NSDictionary *) locationData
+{
     
     
     
@@ -266,8 +267,22 @@ UIAlertView *alertToEnableDeviceLocation;
     NSString *pictureUrl = [dataOfLinkedInUser objectForKey:@"pictureUrl"];
     NSDictionary *locationDict = [dataOfLinkedInUser objectForKey:@"location"];
     NSString *locationName = [locationDict objectForKey:@"name"];
-    NSString *address = [dataOfLinkedInUser objectForKey:@"mainAddress"];
-    //NSString *coordinates = [NSString stringWithFormat:@"%.4f",self.location.coordinate.latitude];
+    
+    NSString *address;
+    
+    if (locationData)
+    {
+        address = [locationData objectForKey:@"LocationString"];
+        double lat = [[locationData objectForKey:@"Latitude"] doubleValue];
+        double lon = [[locationData objectForKey:@"Longitude"] doubleValue];
+        self.geo_location = [PFGeoPoint geoPointWithLatitude:lat longitude:lon];
+    }
+    else
+    {
+        address = [dataOfLinkedInUser objectForKey:@"mainAddress"];
+    }
+    
+
     user = [User new];
     if (email != nil) {
         newLinkedInUser[@"email"] = user.email = email;
@@ -354,6 +369,7 @@ UIAlertView *alertToEnableDeviceLocation;
         educationPFObject[@"schoolName"] = [edu objectForKey:@"schoolName"];
         educationPFObject[@"endDate"] = [[edu objectForKey:@"endDate"] objectForKey:@"year"];
         educationPFObject[@"startDate"] = [[edu objectForKey:@"startDate"] objectForKey:@"year"];
+        educationPFObject[@"fieldOfStudy"] = [edu objectForKey:@"fieldOfStudy"];
         
         [educationPFObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
@@ -620,38 +636,21 @@ UIAlertView *alertToEnableDeviceLocation;
      }];
 }
 
-#pragma mark pragma Segue_Delegates
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    [self.loader stopAnimating];
-    if ([segue.destinationViewController isKindOfClass:[AlumniNearByViewController class]]) {
-        AlumniNearByViewController *my_table_search = segue.destinationViewController;
-        my_table_search.is_login_segue = YES;
-    }
-}
-
-
--(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    
-    return YES;
-}
-
 
 - (IBAction)unwindToLogInController:(UIStoryboardSegue *)unwindSegue
 {
     
-    if ([unwindSegue.sourceViewController isKindOfClass:[AlumniNearByViewController class]]) {
-        AlumniNearByViewController *current_user_location = unwindSegue.sourceViewController;
-        if (current_user_location.location != nil) {
-            self.geo_location = [PFGeoPoint geoPointWithLocation:current_user_location.location];
-            if (self.geo_location != nil) {
-                [self saveLinkedInUserOnParse:json];
-            }
-            NSLog(@"current User:%@",self.geo_location);
-
+    if ([unwindSegue.sourceViewController isKindOfClass:[LocationPickerController class]])
+    {
+        LocationPickerController *current_user_location = unwindSegue.sourceViewController;
+        
+        if (current_user_location.dataOfLocation != nil)
+        {
+            [self saveLinkedInUserOnParse:json andLocationData:current_user_location.dataOfLocation];
         }
-        NSLog(@"current User location login:");
-    }else {
+    }
+    else
+    {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [defaults setObject:nil forKey:@"access_token"]; 
@@ -660,6 +659,5 @@ UIAlertView *alertToEnableDeviceLocation;
     [defaults synchronize];
     }
 }
-
 
 @end

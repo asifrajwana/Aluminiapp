@@ -103,8 +103,12 @@ BOOL isAlumni;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     if (indexPath.row==0) {
+        
+        
+        
         [self performSegueWithIdentifier:@"MAP_DETAILS_SEGUE" sender:self];
     }else if (indexPath.row==1){
         [self performSegueWithIdentifier:@"SEARCH_FILTER_SEGUE" sender:self];

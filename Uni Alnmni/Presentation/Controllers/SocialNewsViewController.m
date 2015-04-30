@@ -76,11 +76,11 @@ NSInteger row;
         NSString *degree;
         
         if ([[self.mapUserListData objectAtIndex:indexPath.row] respondsToSelector:@selector(isEqualToString:)]) {
-            degree = @"start-end";
+            degree = @"";
         }
         else
         {
-            degree = [NSString stringWithFormat:@"%@",[self.mapUserListData objectAtIndex:indexPath.row][@"endDate"]];
+            degree = [NSString stringWithFormat:@"%@-%@",[self.mapUserListData objectAtIndex:indexPath.row][@"startDate"],[self.mapUserListData objectAtIndex:indexPath.row][@"endDate"]];
         }
         
         cell.cellCatagoryText.text = name;
@@ -106,6 +106,7 @@ NSInteger row;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     row = indexPath.row;
     self.row = indexPath.row;
     // if (indexPath.row >=0) {*/
