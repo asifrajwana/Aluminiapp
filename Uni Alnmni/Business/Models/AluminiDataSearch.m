@@ -13,7 +13,7 @@
 +(void)loadAluminiDataForFilters:(NSArray *)filters andCompletionBlock:(void (^)(NSArray *, NSError *))completionBlock
 {
     
-    NSArray *categories = [NSArray arrayWithObjects:@"Name",@"industry",@"degree",@"schoolName",@"Date",@"locationName", nil];
+    NSArray *categories = [NSArray arrayWithObjects:@"Name",@"industry",@"degree",@"fieldOfStudy",@"schoolName",@"Date",@"locationName", nil];
     
     // apply category filter
     if ( [filters count])
@@ -56,7 +56,7 @@
                 }
             
             }
-            else if (i==1 || i==2)
+            else if (i==1 || i==2 || i==3)
             {
                 if ([[filters objectAtIndex:i] length])
                 {

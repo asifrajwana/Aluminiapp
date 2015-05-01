@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0301C5C1AF2EE38001E9BEB /* AlumniNearByViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0301C5B1AF2EE38001E9BEB /* AlumniNearByViewController.m */; };
 		E04DAADF1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E04DAADE1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m */; };
 		E06D6D491AF222530013E1C9 /* AluminiSearchResultsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06D6D481AF222530013E1C9 /* AluminiSearchResultsTableController.m */; };
 		E06D6D4C1AF2551F0013E1C9 /* AluminiAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E06D6D4B1AF2551F0013E1C9 /* AluminiAnnotation.m */; };
@@ -108,6 +109,8 @@
 		147BE6C63E6D6EFB6E68FBEE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		1DDDC40BF3AC8C53086728A5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		242ABFB846980CF2FB94856D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E0301C5A1AF2EE38001E9BEB /* AlumniNearByViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlumniNearByViewController.h; sourceTree = "<group>"; };
+		E0301C5B1AF2EE38001E9BEB /* AlumniNearByViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlumniNearByViewController.m; sourceTree = "<group>"; };
 		E04DAADD1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenCustomCellTableViewCell.h; sourceTree = "<group>"; };
 		E04DAADE1ADC145D00929CE2 /* HomeScreenCustomCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenCustomCellTableViewCell.m; sourceTree = "<group>"; };
 		E06D6D471AF222530013E1C9 /* AluminiSearchResultsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AluminiSearchResultsTableController.h; sourceTree = "<group>"; };
@@ -581,6 +584,8 @@
 		E0A7387B1ADEAA7C00888CFE /* AlumniNearBy */ = {
 			isa = PBXGroup;
 			children = (
+				E0301C5A1AF2EE38001E9BEB /* AlumniNearByViewController.h */,
+				E0301C5B1AF2EE38001E9BEB /* AlumniNearByViewController.m */,
 				E06D6D471AF222530013E1C9 /* AluminiSearchResultsTableController.h */,
 				E06D6D481AF222530013E1C9 /* AluminiSearchResultsTableController.m */,
 				E06D6D4A1AF2551F0013E1C9 /* AluminiAnnotation.h */,
@@ -829,6 +834,7 @@
 				E08C96061ADD25D3006FC7F3 /* HomeController.h in Sources */,
 				E0ADE2CB1AE00B8000415143 /* AlumniSearchViewController.m in Sources */,
 				E08C96071ADD25D3006FC7F3 /* HomeScreenCustomCellTableViewCell.h in Sources */,
+				E0301C5C1AF2EE38001E9BEB /* AlumniNearByViewController.m in Sources */,
 				E08C95A81ADD1699006FC7F3 /* hmac.c in Sources */,
 				E08C95F61ADD16DB006FC7F3 /* ProfileTabView.m in Sources */,
 				E08C95E91ADD16DB006FC7F3 /* OADataFetcher.m in Sources */,

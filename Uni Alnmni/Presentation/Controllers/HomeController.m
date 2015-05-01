@@ -21,7 +21,7 @@ BOOL isAlumni;
     
     
     tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    homeList = @[@"Alunmi Nearby",@"Search ",@"Directory",@"News and Social"];
+    homeList = @[@"Alunmi Nearby",@"Search / Filter",@"Directory",@"News and Social"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [footer_view setBackgroundColor:BLUE_HEADER];
     isAlumni = [[defaults objectForKey:@"isAlumni"] boolValue];

@@ -26,6 +26,7 @@
     [self.picker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
     [self.endPicker addTarget:self action:@selector(enddatePickerChanged:) forControlEvents:UIControlEventValueChanged];
     [self setDateFromPicker:self.picker];
+    [self setEndDateFromPicker:self.endPicker];
     // Do any additional setup after loading the view.
 }
 

@@ -205,7 +205,7 @@ MKCoordinateRegion region;
     manager.delegate = nil;
     
     if(!self.is_login_segue && !self.is_search_segue){
-        [self getUsersNearMyLocation:currLocation withInKM:200.0];
+        [self getUsersNearMyLocation:currLocation withInKM:100.0];
     }
     else if (self.is_login_segue)
     {
@@ -215,6 +215,12 @@ MKCoordinateRegion region;
          isLocation = NO;
          
     }
+    
+}
+
+- (void)openAnnotation:(id)annotation;
+{
+    [self.mapViewAlumni selectAnnotation:annotation animated:YES];
     
 }
 
@@ -536,7 +542,7 @@ MKCoordinateRegion region;
     MKMapItem *firstItem = self.places[indexPath.row];
     self.mapitem = firstItem;
     self.location = self.mapitem.placemark.location;
-    [self getUsersNearMyLocation:self.location withInKM:10.0];
+    [self getUsersNearMyLocation:self.location withInKM:20.0];
     
     /*
     [self setAndAddAnnotation:firstItem.placemark.coordinate andAluminiName:firstItem.placemark.name];
@@ -728,9 +734,12 @@ MKCoordinateRegion region;
 
             PFObject *obj = [self.PFObjectList objectAtIndex:vc.row];
             PFGeoPoint *objGeoPoint = obj[@"coordinates"];
-            [self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
-        [self setAndAddAnnotation:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude) andAluminiName:[NSString stringWithFormat:@"%@ %@",obj[@"firstName"],obj[@"lastName"]]];
+            //[self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
+        AluminiAnnotation *annot = [[AluminiAnnotation alloc] initWithCoordinate:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude) andTitle:[NSString stringWithFormat:@"%@ %@",obj[@"firstName"],obj[@"lastName"]]];
+
             [self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
+        [self.mapViewAlumni addAnnotation:annot];
+                [self openAnnotation:annot];
     }
 }
 

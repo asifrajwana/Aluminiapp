@@ -109,7 +109,7 @@
             </objects>
             <point key="canvasLocation" x="1076" y="426"/>
         </scene>
-        <!--Search Alumni-->
+        <!--Search / Filter-->
         <scene sceneID="VoV-S5-jHv">
             <objects>
                 <viewController id="Ui2-h8-ME2" customClass="AlumniSearchViewController" sceneMemberID="viewController">
@@ -243,7 +243,7 @@
                             <constraint firstItem="zNf-M5-8lE" firstAttribute="top" secondItem="o5j-d4-470" secondAttribute="bottom" id="ySE-vT-San"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search Alumni" id="OAD-nw-dAs">
+                    <navigationItem key="navigationItem" title="Search / Filter" id="OAD-nw-dAs">
                         <barButtonItem key="leftBarButtonItem" image="menubutton-1" id="vCd-Cl-eUf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -277,9 +277,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="khI-Dr-WTF">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khI-Dr-WTF">
                                 <rect key="frame" x="0.0" y="540" width="600" height="60"/>
                                 <color key="backgroundColor" red="0.093726979299999999" green="0.50093047660000001" blue="0.70920360329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Sww-ck-FXU"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWc-Dh-e8p">
                                 <rect key="frame" x="94" y="113" width="412" height="29"/>
@@ -609,6 +612,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="supportAlumini:" destination="0PF-m0-bdB" eventType="touchUpInside" id="ivD-Xd-9j4"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqB-Q8-ZZV">
                                 <rect key="frame" x="0.0" y="279" width="600" height="30"/>
@@ -627,14 +633,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mma-qF-FrA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mma-qF-FrA">
                                 <rect key="frame" x="0.0" y="64" width="600" height="140"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="p3y-pJ-ebJ"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="setting_cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="setting_cell" rowHeight="45" id="srF-CU-sMA" customClass="SettingTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="setting_cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="setting_cell" rowHeight="50" id="srF-CU-sMA" customClass="SettingTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="srF-CU-sMA" id="HsF-dP-cbe">
@@ -648,7 +654,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q82-cW-gsA">
-                                                    <rect key="frame" x="46" y="15" width="460" height="15"/>
+                                                    <rect key="frame" x="46" y="15" width="460" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1083,6 +1089,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="footer_view" destination="Xhc-C1-F6e" id="odw-WQ-y3s"/>
+                        <outlet property="mapViewAlumni" destination="VWa-jH-1Bc" id="5gp-d1-FG5"/>
+                        <outlet property="slider" destination="Cmc-5S-74e" id="kt9-2V-yWs"/>
                         <segue destination="grD-MD-17r" kind="unwind" identifier="UNWIND_TO_LOGIN" unwindAction="unwindToLogInController:" id="XE0-G0-bhK"/>
                     </connections>
                 </viewController>
@@ -1268,8 +1277,8 @@
         <image name="settings" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Oob-W9-fjc"/>
-        <segue reference="G2E-fc-QNP"/>
+        <segue reference="AR2-rf-ZCq"/>
+        <segue reference="Q3g-7n-HmX"/>
         <segue reference="Ttn-J9-xHo"/>
         <segue reference="wh3-m7-89m"/>
     </inferredMetricsTieBreakers>

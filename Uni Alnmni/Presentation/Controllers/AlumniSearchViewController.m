@@ -36,8 +36,8 @@ int selectedIndex;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [footer_View setBackgroundColor:BLUE_HEADER];
-    ListData = @[@"Name",@"Industry",@"Degree",@"School Name",@"Year", @"Location"];
-    self.selectedData = [[NSMutableArray alloc] initWithObjects:@"",@"all",@"all",@"all",@"", @"all", nil];
+    ListData = @[@"Name",@"Industry",@"Degree",@"Field Of Study",@"School Name",@"Year", @"Location"];
+    self.selectedData = [[NSMutableArray alloc] initWithObjects:@"",@"all",@"all",@"all", @"all",@"", @"all", nil];
     // Do any additional setup after loading the view.
 }
 
@@ -65,7 +65,7 @@ int selectedIndex;
     cell.cellCatagoryText.text = ListData[indexPath.row];
     cell.cellSelectedText.text = self.selectedData[indexPath.row];
     cell.cellCatagoryText.textColor=BLUE_LIGHT_Color;
-    if(indexPath.row == 1 || indexPath.row ==2 || indexPath.row ==5){
+    if(indexPath.row == 1 || indexPath.row ==2 || indexPath.row ==6){
         
     }else{
         cell.cellImage.image = nil;
@@ -82,9 +82,9 @@ int selectedIndex;
     
     selectedIndex = (int)indexPath.row;
     
-    if (indexPath.row == 4) {
+    if (indexPath.row == 5) {
         [self performSegueWithIdentifier:@"SEARCH_DATA_DATE_SEGUE" sender:self];
-    }else if(indexPath.row == 5){
+    }else if(indexPath.row == 6){
         [self performSegueWithIdentifier:@"SEARCH_LOCATION_SEGUE" sender:self];
     }else {
         [self performSegueWithIdentifier:@"SEARCH_DATA_TEXT_SEGUE" sender:self];
@@ -135,8 +135,14 @@ int selectedIndex;
         DatepickerViewController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
         //if (![SDSViewConroller.starthintSet isEqualToString:@""]) {
-            NSString *dates = [SDSViewConroller.starthintSet stringByAppendingString:@"-"];
+        
+        NSString *dates = [@"(" stringByAppendingString:SDSViewConroller.starthintSet];
+        
+            dates = [dates stringByAppendingString:@"-"];
+        
             dates = [dates stringByAppendingString:SDSViewConroller.endhintSet];
+        
+        dates = [dates stringByAppendingString:@")"];
             
             self.cellSelected.cellSelectedText.text = dates;
             
@@ -185,7 +191,11 @@ int selectedIndex;
             self.PfObjectList = objects;
             [self performSegueWithIdentifier:@"SEARCH_MAP_SEGUE" sender:self];
         }
-        else if (error)
+        else if (error )
+        {
+            [SVProgressHUD showErrorWithStatus:@"Alumni not found" maskType:SVProgressHUDMaskTypeClear];
+        }
+        else if([objects count]==0)
         {
             [SVProgressHUD showErrorWithStatus:@"Alumni not found" maskType:SVProgressHUDMaskTypeClear];
         }
@@ -195,7 +205,7 @@ int selectedIndex;
 
 - (IBAction)resetAllFields:(id)sender {
     
-    self.selectedData = [[NSMutableArray alloc] initWithObjects:@"",@"all",@"all",@"all",@"all",@"", @"all", nil];
+    self.selectedData = [[NSMutableArray alloc] initWithObjects:@"",@"all",@"all",@"all", @"all",@"", @"all", nil];
     [tableview reloadData];
 }
 @end
