@@ -1091,6 +1091,7 @@
                     <connections>
                         <outlet property="footer_view" destination="Xhc-C1-F6e" id="odw-WQ-y3s"/>
                         <outlet property="mapViewAlumni" destination="VWa-jH-1Bc" id="5gp-d1-FG5"/>
+                        <outlet property="searchResultCounter" destination="fLC-h9-tUJ" id="OoJ-mu-RcB"/>
                         <outlet property="slider" destination="Cmc-5S-74e" id="kt9-2V-yWs"/>
                         <segue destination="grD-MD-17r" kind="unwind" identifier="UNWIND_TO_LOGIN" unwindAction="unwindToLogInController:" id="XE0-G0-bhK"/>
                     </connections>

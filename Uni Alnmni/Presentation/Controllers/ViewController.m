@@ -27,6 +27,7 @@
 
 bool isAlumni;
 NSDictionary *json;
+NSString *address;
 
 NSString *userLoginToken;
 int first_random_no,second_random_no;
@@ -202,10 +203,11 @@ UIAlertView *alertToEnableDeviceLocation;
                                                  for (CLPlacemark* aPlacemark in placemarks)
                                                  {
                                                      count++;
-                                                     NSLog(@"Name = %@", aPlacemark.locality);
+                                                     NSLog(@"Name = %@", aPlacemark);
                                                      NSLog(@"Current Location:%lu",(unsigned long)placemarks.count);
                                                      if ([aPlacemark.locality isEqualToString:self.current_city]) {
                                                          self.geo_location = [PFGeoPoint geoPointWithLocation:self.location];
+                                                        
                                                      }else if (placemarks.count == count){
                                                      
                                                          UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Warning!" message:@"The map is unable to locate your LinkedIn Address. Please proceed to enter your location." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -245,6 +247,33 @@ UIAlertView *alertToEnableDeviceLocation;
     
 }
 
+- (NSString *)niceNameForPlacemark:(CLPlacemark *)placemark {
+    
+    NSString *returnString = nil;
+    
+    if ( placemark.locality && [[placemark.addressDictionary objectForKey:@"FormattedAddressLines"] count]==3)
+    {
+        
+        NSString *name = [placemark.addressDictionary objectForKey:@"Name"];
+        
+        NSString *city =[placemark.addressDictionary objectForKey:@"City"];
+        
+        NSString *state = [placemark.addressDictionary objectForKey:@"State"];
+        
+        if ([placemark.addressDictionary objectForKey:@"ZIP"])
+        {
+            state = [NSString stringWithFormat:@"%@ %@", state, [placemark.addressDictionary objectForKey:@"ZIP"] ];
+        }
+        
+        NSString *country = [placemark.addressDictionary objectForKey:@"Country"];
+        
+        returnString = [NSString stringWithFormat:@"%@, %@, %@, %@", name, city, state, country];
+        NSLog(@"location name%@",returnString);
+    }
+    return returnString;
+}
+
+
 - (void)profileApiCallResult:(OAServiceTicket *)ticket didFail:(NSData *)error
 {
     NSLog(@"Error in Login%@",[error description]);
@@ -268,7 +297,7 @@ UIAlertView *alertToEnableDeviceLocation;
     NSDictionary *locationDict = [dataOfLinkedInUser objectForKey:@"location"];
     NSString *locationName = [locationDict objectForKey:@"name"];
     
-    NSString *address;
+    
     
     if (locationData)
     {
@@ -277,10 +306,7 @@ UIAlertView *alertToEnableDeviceLocation;
         double lon = [[locationData objectForKey:@"Longitude"] doubleValue];
         self.geo_location = [PFGeoPoint geoPointWithLatitude:lat longitude:lon];
     }
-    else
-    {
-        address = [dataOfLinkedInUser objectForKey:@"mainAddress"];
-    }
+    
     
 
     user = [User new];
@@ -510,7 +536,7 @@ UIAlertView *alertToEnableDeviceLocation;
              self.current_city = placemark.locality;
              
              
-             
+             address = [self niceNameForPlacemark:placemark];
              // [SVProgressHUD showSuccessWithStatus:@"Location Found"];
          }
      }];
@@ -657,6 +683,8 @@ UIAlertView *alertToEnableDeviceLocation;
     [defaults setObject:nil forKey:@"isAlumni"];
     [defaults setObject:nil forKey:@"user"];
     [defaults synchronize];
+        self.geo_location = nil;
+        address= nil;
     }
 }
 

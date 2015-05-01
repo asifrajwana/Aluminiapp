@@ -83,7 +83,7 @@ MKCoordinateRegion region;
     }
     else
     {
-        [SVProgressHUD showWithStatus:@"Finding Nearby Alumni" maskType:SVProgressHUDMaskTypeClear];
+
         self.geocoder = [[CLGeocoder alloc] init];
         [self getUserCurrentLocation];
     }
@@ -205,6 +205,7 @@ MKCoordinateRegion region;
     manager.delegate = nil;
     
     if(!self.is_login_segue && !self.is_search_segue){
+                [SVProgressHUD showWithStatus:@"Finding Nearby Alumni" maskType:SVProgressHUDMaskTypeClear];
         [self getUsersNearMyLocation:currLocation withInKM:100.0];
     }
     else if (self.is_login_segue)
@@ -688,9 +689,14 @@ MKCoordinateRegion region;
         {
             [self loadEducationDetails:userObjects];
         }
+        else if([userObjects count]==0)
+        {
+            [SVProgressHUD showErrorWithStatus:@"Alumni not found" maskType:SVProgressHUDMaskTypeClear];
+        }
         else
         {
-            [SVProgressHUD showErrorWithStatus:@"No Alumni found near you" maskType:SVProgressHUDMaskTypeClear];
+            [SVProgressHUD showErrorWithStatus:@"No Alumni found" maskType:SVProgressHUDMaskTypeClear];
+            
         }
 
         
@@ -736,10 +742,10 @@ MKCoordinateRegion region;
             PFGeoPoint *objGeoPoint = obj[@"coordinates"];
             //[self.mapViewAlumni removeAnnotations:self.mapViewAlumni.annotations];
         AluminiAnnotation *annot = [[AluminiAnnotation alloc] initWithCoordinate:CLLocationCoordinate2DMake(objGeoPoint.latitude, objGeoPoint.longitude) andTitle:[NSString stringWithFormat:@"%@ %@",obj[@"firstName"],obj[@"lastName"]]];
-
-            [self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
         [self.mapViewAlumni addAnnotation:annot];
-                [self openAnnotation:annot];
+        [self openAnnotation:annot];
+            [self zoomMapViewToFitAnnotations:self.mapViewAlumni animated:YES];
+
     }
 }
 
