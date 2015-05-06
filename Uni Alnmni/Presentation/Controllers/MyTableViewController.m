@@ -1,25 +1,13 @@
 
 #import "MyTableViewController.h"
-//#import "MapViewController.h"
-
-
 #import "AlumniSearchViewController.h"
 
-// note: we use a custom segue here in order to cache/reuse the
-//       destination view controller (i.e. MapViewController) each time you select a place
-//
+
 @interface DetailSegue : UIStoryboardSegue
 @end
 
 @implementation DetailSegue
 
-- (void)perform
-{
-    // our custom segue is being fired, push the map view controller
-    MyTableViewController *sourceViewController = self.sourceViewController;
-    //MapViewController *destinationViewController = self.destinationViewController;
-    //[sourceViewController.navigationController pushViewController:destinationViewController animated:YES];
-}
 
 @end
 
@@ -265,6 +253,8 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 {
     // report any errors returned back from Location Services
 }
+
+#pragma mark Wind_Unwind_functions
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
         NSIndexPath *selectedItem = [self.tableView indexPathForSelectedRow];

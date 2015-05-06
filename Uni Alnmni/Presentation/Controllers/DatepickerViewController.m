@@ -19,8 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.footer_View setBackgroundColor:BLUE_HEADER];
-    //hint.text = self.starthintSet;
-    //self.picker.datePickerMode = UIDatePickerModeDate;
     self.starthintSet = @"start";
     self.endhintSet = @"end";
     [self.picker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
@@ -66,14 +64,5 @@
     starthintSet = @"";
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

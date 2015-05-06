@@ -18,7 +18,9 @@
 @implementation SocialNewsViewController
 
 NSInteger row;
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [footer_view setBackgroundColor:BLUE_HEADER];
     socialTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -28,23 +30,30 @@ NSInteger row;
     }else {
     tableRows = [[NSMutableArray alloc] initWithObjects:@"Twitter",@"Facebook",@"Events",@"LinkedInGroup", nil];
     addresses = [[NSMutableArray alloc] initWithObjects:
-    @"https://twitter.com/bucknellu",
-    @"https://www.facebook.com/BucknellU",
-    @"http://www.bucknell.edu/EventsManagement",
-    @"https://www.linkedin.com/company/bucknell-university",nil];
+    @"https://twitter.com/fhkrems",
+    @"https://www.facebook.com/imcfhkrems",
+    @"http://fh-alumni.at/page/events",
+    @"",nil];
     }
     
     NSLog(@"User Edu = %@", self.mapUserListData);
     // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
+#pragma mark TableView_Delegates
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
     return 1;
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -54,6 +63,7 @@ NSInteger row;
     }else {
         return tableRows.count;
     }
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -104,11 +114,11 @@ NSInteger row;
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     row = indexPath.row;
-    self.row = indexPath.row;
+    self.row =(int) indexPath.row;
     // if (indexPath.row >=0) {*/
     if (!self.is_map_list) {
         [self performSegueWithIdentifier:@"SOCIAL_NEWS_SEGUE" sender:self];
@@ -116,6 +126,8 @@ NSInteger row;
     
     //}
 }
+
+#pragma mark Wind_Unwind_functions
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 
@@ -131,22 +143,13 @@ NSInteger row;
     if ([segue.identifier isEqualToString:@"UNWIND_NEARBY_SEGUE"] ) {
         
         NSLog(@"Self row = %d", self.row);
-        self.row = [socialTableview indexPathForSelectedRow].row;
+        self.row = (int)[socialTableview indexPathForSelectedRow].row;
     }
+    
 }
 
 - (IBAction)unwindToSocialController:(UIStoryboardSegue *)unwindSegue
 {
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -30,9 +30,14 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"logo"] forBarMetrics:UIBarMetricsDefault];
     
-    // Initialize Parse.
+    // Leadstech Parse.
     [Parse setApplicationId:@"4jo1sGjnYSLUpCYVmLrzLYO3EAIM7wMPGUmIBMqm"
                   clientKey:@"4Ng2SkMcoJiGPtBWQGYMgqi6RT1uti8s70gMb3d9"];
+    
+    // Client Parse.
+//    [Parse setApplicationId:@"ZPC6yYavnuuhxcoFWIPX0kWYs5i6yvN9Rq6GLNZl"
+//                  clientKey:@"fajmI59TbYFflv0IRqS9lNx63l3JrKDgZUP090ct"];
+
     [PFUser enableRevocableSessionInBackground];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

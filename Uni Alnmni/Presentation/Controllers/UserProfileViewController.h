@@ -14,8 +14,9 @@
 #import "OADataFetcher.h"
 #import "OATokenManager.h"
 #import <MACachedImageView/MACachedImageView.h>
+#import <MessageUI/MessageUI.h>
 
-@interface UserProfileViewController : UIViewController{
+@interface UserProfileViewController : UIViewController<MFMailComposeViewControllerDelegate>{
     User *user;
     NSString *token_access;
     OAConsumer *consumer;
@@ -24,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *logout_button;
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
-@property (weak, nonatomic) IBOutlet UILabel *userEmail;
+@property (weak, nonatomic) IBOutlet UIButton *userEmail;
 @property (weak, nonatomic) IBOutlet UILabel *userAddress;
 @property (strong, nonatomic) IBOutlet UIView *footer;
 

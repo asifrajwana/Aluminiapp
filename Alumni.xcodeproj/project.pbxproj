@@ -83,6 +83,7 @@
 		E0A5FA5C1ADBDB1500B467D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0A5FA5B1ADBDB1500B467D7 /* Images.xcassets */; };
 		E0A5FA831ADC081F00B467D7 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A5FA821ADC081F00B467D7 /* HomeController.m */; };
 		E0A738801ADEBBB200888CFE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A7387F1ADEBBB200888CFE /* MapKit.framework */; };
+		E0A9E6E31AFA3DCB006FEEB4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A9E6E21AFA3DCB006FEEB4 /* MessageUI.framework */; };
 		E0AA71451AE10C820083063C /* SocialNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AA71441AE10C820083063C /* SocialNewsViewController.m */; };
 		E0AA71491AE11BF60083063C /* AllWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AA71481AE11BF60083063C /* AllWebView.m */; };
 		E0AB8EAD1ADFC71C00A58AFA /* CurrentLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = E0AB8EAC1ADFC71C00A58AFA /* CurrentLocation.m */; };
@@ -193,7 +194,7 @@
 		E0A502911AE6742A0038306B /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		E0A502941AE6AA000038306B /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
 		E0A502951AE6AA000038306B /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
-		E0A5FA4B1ADBDB1500B467D7 /* Alnmni App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alnmni App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0A5FA4B1ADBDB1500B467D7 /* Alumni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alumni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A5FA4F1ADBDB1500B467D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0A5FA501ADBDB1500B467D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E0A5FA521ADBDB1500B467D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -201,12 +202,13 @@
 		E0A5FA551ADBDB1500B467D7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E0A5FA561ADBDB1500B467D7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E0A5FA5B1ADBDB1500B467D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E0A5FA641ADBDB1500B467D7 /* Alnmni AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Alnmni AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0A5FA641ADBDB1500B467D7 /* AlumniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlumniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A5FA691ADBDB1500B467D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0A5FA6A1ADBDB1500B467D7 /* Uni_AlnmniTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uni_AlnmniTests.m; sourceTree = "<group>"; };
 		E0A5FA811ADC081F00B467D7 /* HomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeController.h; sourceTree = "<group>"; };
 		E0A5FA821ADC081F00B467D7 /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
 		E0A7387F1ADEBBB200888CFE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E0A9E6E21AFA3DCB006FEEB4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E0AA71431AE10C820083063C /* SocialNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNewsViewController.h; sourceTree = "<group>"; };
 		E0AA71441AE10C820083063C /* SocialNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNewsViewController.m; sourceTree = "<group>"; };
 		E0AA71471AE11BF60083063C /* AllWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllWebView.h; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0A9E6E31AFA3DCB006FEEB4 /* MessageUI.framework in Frameworks */,
 				E0A738801ADEBBB200888CFE /* MapKit.framework in Frameworks */,
 				E08C96041ADD241A006FC7F3 /* Foundation.framework in Frameworks */,
 				E08C96021ADD2411006FC7F3 /* CoreGraphics.framework in Frameworks */,
@@ -377,8 +380,8 @@
 		E0A5FA4C1ADBDB1500B467D7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E0A5FA4B1ADBDB1500B467D7 /* Alnmni App.app */,
-				E0A5FA641ADBDB1500B467D7 /* Alnmni AppTests.xctest */,
+				E0A5FA4B1ADBDB1500B467D7 /* Alumni.app */,
+				E0A5FA641ADBDB1500B467D7 /* AlumniTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 		E0A738781ADE848800888CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E0A9E6E21AFA3DCB006FEEB4 /* MessageUI.framework */,
 				E0A7387F1ADEBBB200888CFE /* MapKit.framework */,
 				E08C96031ADD241A006FC7F3 /* Foundation.framework */,
 				E08C96011ADD2411006FC7F3 /* CoreGraphics.framework */,
@@ -661,9 +665,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E0A5FA4A1ADBDB1500B467D7 /* Alnmni App */ = {
+		E0A5FA4A1ADBDB1500B467D7 /* Alumni */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E0A5FA6E1ADBDB1500B467D7 /* Build configuration list for PBXNativeTarget "Alnmni App" */;
+			buildConfigurationList = E0A5FA6E1ADBDB1500B467D7 /* Build configuration list for PBXNativeTarget "Alumni" */;
 			buildPhases = (
 				9BD0F330AE5880E5075A8014 /* Check Pods Manifest.lock */,
 				E0A5FA471ADBDB1500B467D7 /* Sources */,
@@ -675,14 +679,14 @@
 			);
 			dependencies = (
 			);
-			name = "Alnmni App";
+			name = Alumni;
 			productName = "Uni Alnmni";
-			productReference = E0A5FA4B1ADBDB1500B467D7 /* Alnmni App.app */;
+			productReference = E0A5FA4B1ADBDB1500B467D7 /* Alumni.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E0A5FA631ADBDB1500B467D7 /* Alnmni AppTests */ = {
+		E0A5FA631ADBDB1500B467D7 /* AlumniTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E0A5FA711ADBDB1500B467D7 /* Build configuration list for PBXNativeTarget "Alnmni AppTests" */;
+			buildConfigurationList = E0A5FA711ADBDB1500B467D7 /* Build configuration list for PBXNativeTarget "AlumniTests" */;
 			buildPhases = (
 				E0A5FA601ADBDB1500B467D7 /* Sources */,
 				E0A5FA611ADBDB1500B467D7 /* Frameworks */,
@@ -693,9 +697,9 @@
 			dependencies = (
 				E0A5FA661ADBDB1500B467D7 /* PBXTargetDependency */,
 			);
-			name = "Alnmni AppTests";
+			name = AlumniTests;
 			productName = "Uni AlnmniTests";
-			productReference = E0A5FA641ADBDB1500B467D7 /* Alnmni AppTests.xctest */;
+			productReference = E0A5FA641ADBDB1500B467D7 /* AlumniTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -717,7 +721,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E0A5FA461ADBDB1500B467D7 /* Build configuration list for PBXProject "Alnmni App" */;
+			buildConfigurationList = E0A5FA461ADBDB1500B467D7 /* Build configuration list for PBXProject "Alumni" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -730,8 +734,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E0A5FA4A1ADBDB1500B467D7 /* Alnmni App */,
-				E0A5FA631ADBDB1500B467D7 /* Alnmni AppTests */,
+				E0A5FA4A1ADBDB1500B467D7 /* Alumni */,
+				E0A5FA631ADBDB1500B467D7 /* AlumniTests */,
 			);
 		};
 /* End PBXProject section */
@@ -884,7 +888,7 @@
 /* Begin PBXTargetDependency section */
 		E0A5FA661ADBDB1500B467D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E0A5FA4A1ADBDB1500B467D7 /* Alnmni App */;
+			target = E0A5FA4A1ADBDB1500B467D7 /* Alumni */;
 			targetProxy = E0A5FA651ADBDB1500B467D7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1013,7 +1017,7 @@
 				INFOPLIST_FILE = "Uni Alnmni/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "Alnmni App";
+				PRODUCT_NAME = Alumni;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -1028,7 +1032,7 @@
 				INFOPLIST_FILE = "Uni Alnmni/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "Alnmni App";
+				PRODUCT_NAME = Alumni;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -1047,7 +1051,7 @@
 				);
 				INFOPLIST_FILE = "Uni AlnmniTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "Alnmni AppTests";
+				PRODUCT_NAME = AlumniTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Uni Alnmni.app/Uni Alnmni";
 			};
 			name = Debug;
@@ -1062,7 +1066,7 @@
 				);
 				INFOPLIST_FILE = "Uni AlnmniTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "Alnmni AppTests";
+				PRODUCT_NAME = AlumniTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Uni Alnmni.app/Uni Alnmni";
 			};
 			name = Release;
@@ -1070,7 +1074,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E0A5FA461ADBDB1500B467D7 /* Build configuration list for PBXProject "Alnmni App" */ = {
+		E0A5FA461ADBDB1500B467D7 /* Build configuration list for PBXProject "Alumni" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E0A5FA6C1ADBDB1500B467D7 /* Debug */,
@@ -1079,7 +1083,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E0A5FA6E1ADBDB1500B467D7 /* Build configuration list for PBXNativeTarget "Alnmni App" */ = {
+		E0A5FA6E1ADBDB1500B467D7 /* Build configuration list for PBXNativeTarget "Alumni" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E0A5FA6F1ADBDB1500B467D7 /* Debug */,
@@ -1088,7 +1092,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E0A5FA711ADBDB1500B467D7 /* Build configuration list for PBXNativeTarget "Alnmni AppTests" */ = {
+		E0A5FA711ADBDB1500B467D7 /* Build configuration list for PBXNativeTarget "AlumniTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E0A5FA721ADBDB1500B467D7 /* Debug */,

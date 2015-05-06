@@ -16,17 +16,14 @@
 @implementation SettingViewController
 NSArray *arr;
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [defaults objectForKey:@"user"];
     arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     [self.footer setBackgroundColor:BLUE_HEADER];
-    //self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self backButton];
-    //self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    //[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"Untitled-1"]];
-    //[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"Untitled-1"]];
-    // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,17 +31,22 @@ NSArray *arr;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark TableView_Delegates
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
+    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
+    
 }
 
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return @" ";
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -69,7 +71,10 @@ NSArray *arr;
     return cell;
 }
 
+#pragma mark Class_Function
+
 -(void)backButton{
+    
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *backBtnImage = [UIImage imageNamed:@"Untitled-1"]  ;
     [backBtn setImage:backBtnImage forState:UIControlStateNormal];
@@ -78,28 +83,36 @@ NSArray *arr;
     backBtn.frame = CGRectMake(0, 0, 54, 30);
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn] ;
     self.navigationItem.leftBarButtonItem = backButton;
+    
+}
+
+- (void)goback
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 
+#pragma mark AlertView_Delegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Yes"]) {
         [self performSegueWithIdentifier:@"LOGOUT_SEGUE" sender:self];
     }
+    
 }
 
-- (void)goback
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+#pragma mark Controller_Actions
 
 - (IBAction)logout:(id)sender {
     
     UIAlertView *logoutAlert = [[UIAlertView alloc] initWithTitle:@"Logging Out" message:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [logoutAlert show];
+    
 }
 - (IBAction)supportAlumini:(id)sender {
+    
     if ([MFMailComposeViewController canSendMail]) {
         
         NSString *emailTitle = @"Alumni App - User Feedback";
@@ -118,7 +131,10 @@ NSArray *arr;
         [self presentViewController:mc animated:YES completion:NULL];
         
     }
+    
 }
+
+#pragma mark Mail_composer_delegate
 
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
@@ -145,15 +161,5 @@ NSArray *arr;
     
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

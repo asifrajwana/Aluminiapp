@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "ViewController.h"
 #import "Constants.h"
+
 @interface UserProfileViewController ()
 
 @end
@@ -21,23 +22,7 @@
 NSDate *now;
 NSTimer *refreshTimer;
 
-- (void)set_data {
-    // Do any additional setup after loading the view.
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSData *data = [defaults objectForKey:@"user"];
-//    NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//    
-//    userName.text = [NSString stringWithFormat:@"%@ %@",[arr objectAtIndex:0],[arr objectAtIndex:1]];
-//    userEmail.text = [arr objectAtIndex:2];
-//    NSString *address = [[NSString alloc] initWithFormat:@"Address: %@",[arr objectAtIndex:3]];
-//    userAddress.text = address;
-//    [userpic displayImageFromURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@",[arr objectAtIndex:4]]]];
-//    userpic.layer.cornerRadius = userpic.frame.size.width/2;
-//    userpic.clipsToBounds = YES;
-//    userpic.layer.borderWidth = 3.0f;
-//    userpic.layer.borderColor = [UIColor whiteColor].CGColor;
-    [self setUserData];
-}
+#pragma mark Init_Function
 
 -(void)setUserData{
     
@@ -49,8 +34,7 @@ NSTimer *refreshTimer;
         userName.text = [NSString stringWithFormat:@"%@ %@",[arr objectAtIndex:0],[arr objectAtIndex:1]];
         
     }if([arr objectAtIndex:2] !=nil){
-        userEmail.text = [arr objectAtIndex:2];
-        userEmail.textColor=BLUE_LIGHT_Color;
+        [userEmail setTitle:[arr objectAtIndex:2] forState:UIControlStateNormal];        [userEmail setTitleColor:BLUE_LIGHT_Color forState:UIControlStateNormal];
         
     }if([arr objectAtIndex:3] !=nil){
         NSString *address = [[NSString alloc] initWithFormat:@"Address: %@",[arr objectAtIndex:3]];
@@ -65,23 +49,28 @@ NSTimer *refreshTimer;
     userpic.layer.borderWidth = 3.0f;
     userpic.layer.borderColor = [UIColor whiteColor].CGColor;
     now = [NSDate date];
+    
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    [self set_data];
-    [self.footer setBackgroundColor:BLUE_HEADER];
     
+    [super viewDidLoad];
+    [self setUserData];
+    [self.footer setBackgroundColor:BLUE_HEADER];
     
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
-- (void)profileApiCall
-{
+#pragma mark Controller_Class_Function
+
+- (void)profileApiCall{
+    
     NSString *apikey = @"75c6gdfxvh8oh4";
     NSString *secretkey = @"J6apdtZHHWqFtUAZ";
     
@@ -112,8 +101,8 @@ NSTimer *refreshTimer;
     
 }
 
-- (void)profileApiCallResult:(OAServiceTicket *)ticket didFinish:(NSData *)data
-{
+- (void)profileApiCallResult:(OAServiceTicket *)ticket didFinish:(NSData *)data{
+    
     NSError *error;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
                                                          options:kNilOptions
@@ -194,29 +183,19 @@ NSTimer *refreshTimer;
         }
     }];
     
-    
-    
 }
 
-- (void)profileApiCallResult:(OAServiceTicket *)ticket didFail:(NSData *)error
-{
+- (void)profileApiCallResult:(OAServiceTicket *)ticket didFail:(NSData *)error{
+    
     NSLog(@"Error in Login%@",[error description]);
-}
-
-- (IBAction)sync:(id)sender {
-    
-    if (refreshTimer==nil) {
-        [self fireTimer];
-        //now = [NSDate date];
-        [self profileApiCall];
-    }
     
 }
 
-- (BOOL) hasExpired:(NSDate*)myDate
-{
+- (BOOL) hasExpired:(NSDate*)myDate{
+    
     NSLog(@"%f",[myDate timeIntervalSinceNow]);
     return [myDate timeIntervalSinceNow] < -120.f;
+    
 }
 
 -(void)timeOut
@@ -234,19 +213,68 @@ NSTimer *refreshTimer;
     
 }
 
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-//    if ([segue.destinationViewController isKindOfClass:[ViewController class]]) {
-//        
-//    }
-//
-//}
+#pragma mark Controller_Actions
 
-//-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-//    UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:@"Logout" message:@"Are you sure you want to logout?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-//
-//    [confirm show];
-//    return NO;
-//}
+- (IBAction)sync:(id)sender {
+    
+    if (refreshTimer==nil) {
+        [self fireTimer];
+        //now = [NSDate date];
+        [self profileApiCall];
+    }
+    
+}
+
+
+- (IBAction)sendEmail:(id)sender {
+    
+    if ([MFMailComposeViewController canSendMail]) {
+        
+        NSString *emailTitle = @"Alumni App - User Feedback";
+        // Email Content
+        NSString *messageBody = @"Please share your feedback here..";
+        // To address
+        NSArray *toRecipents = [NSArray arrayWithObject:@"support@ixsol.at"];
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        [mc setSubject:emailTitle];
+        [mc setMessageBody:messageBody isHTML:NO];
+        [mc setToRecipients:toRecipents];
+        
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
+        
+    }
+    
+}
+
+#pragma mark Mail_Composer_Delegate
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
+
+}
+
+
 
 
 @end

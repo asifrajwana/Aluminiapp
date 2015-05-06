@@ -21,11 +21,13 @@ BOOL isAlumni;
     
     
     tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    homeList = @[@"Alunmi Nearby",@"Search / Filter",@"Directory",@"News and Social"];
+    homeList = @[@"Alumni Nearby",@"Search / Filter",@"Directory",@"News and Social"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [footer_view setBackgroundColor:BLUE_HEADER];
     isAlumni = [[defaults objectForKey:@"isAlumni"] boolValue];
     [tell_your_friend_button setBackgroundColor:BLUE_LIGHT_Color];
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.hidesBackButton = YES;
     NSLog(isAlumni ? @"Yes" : @"No");
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header1"]];
 
@@ -37,6 +39,7 @@ BOOL isAlumni;
     
 }
 
+#pragma mark TableView_Delegates
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -84,14 +87,14 @@ BOOL isAlumni;
     
     if(!isAlumni){
         
-        if (indexPath.row==5){
+        if (indexPath.row==4){
             //[self performSegueWithIdentifier:@"SOCIAL_NEWS_SEGUE" sender:self];
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
             cell.userInteractionEnabled = YES;
             cell.textLabel.enabled = YES;
         }else {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.userInteractionEnabled = NO;
+            //cell.userInteractionEnabled = NO;
             cell.textLabel.enabled = NO;
             cell.textLabel.textColor = [UIColor lightGrayColor];
         }
@@ -117,39 +120,44 @@ BOOL isAlumni;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    if (indexPath.row==1) {
+    if(isAlumni){
+        if (indexPath.row==1) {
 
-        [self performSegueWithIdentifier:@"MAP_DETAILS_SEGUE" sender:self];
-    }else if (indexPath.row==2){
-        [self performSegueWithIdentifier:@"SEARCH_FILTER_SEGUE" sender:self];
+            [self performSegueWithIdentifier:@"MAP_DETAILS_SEGUE" sender:self];
+        }else if (indexPath.row==2){
+            [self performSegueWithIdentifier:@"SEARCH_FILTER_SEGUE" sender:self];
 
-    }else if (indexPath.row==0){
-        [self performSegueWithIdentifier:@"PROFILE_SEGUE" sender:self];
-    }else if (indexPath.row==3){
-        [self performSegueWithIdentifier:@"WEB_VIEW_SEGUE" sender:self];
+        }else if (indexPath.row==0){
+            [self performSegueWithIdentifier:@"PROFILE_SEGUE" sender:self];
+        }else if (indexPath.row==3){
+            [self performSegueWithIdentifier:@"WEB_VIEW_SEGUE" sender:self];
         
-    }else if (indexPath.row==4){
+        }else if (indexPath.row==4){
+            [self performSegueWithIdentifier:@"SOCIAL_NEWS_SEGUE" sender:self];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+            isAlumni = [[defaults objectForKey:@"isAlumni"] boolValue];
+        }
+    }else if(indexPath.row==4){
         [self performSegueWithIdentifier:@"SOCIAL_NEWS_SEGUE" sender:self];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
-        isAlumni = [[defaults objectForKey:@"isAlumni"] boolValue];
-    }else if(!isAlumni){
+    }else{
             
-            UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"It looks like you don’t have permission  to view this content. Please wait for an administrator to approve your affiliation request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [chose_current_location show];
+        UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"It looks like you don’t have permission  to view this content. Please wait for an administrator to approve your affiliation request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [chose_current_location show];
         
-    
     }
     
 }
 
+#pragma mark Wind_Unwind_Functions
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
     if ([segue.identifier isEqualToString:@"WEB_VIEW_SEGUE"]) {
         AllWebView *vc = [segue destinationViewController];
         
         // Pass any objects to the view controller here, like...
-        vc.fullUrl = @"http://www.bucknell.edu/script/communication/EverythingDirectory/";
+        vc.fullUrl = @"http://fh-alumni.at/page/directory";
         vc.tittle = @"Campus Directory";
     }
 
@@ -158,38 +166,18 @@ BOOL isAlumni;
 - (IBAction)unwindToHomeController:(UIStoryboardSegue *)unwindSegue
 {
 }
+
+#pragma mark Controller_Actions
+
 - (IBAction)tell_your_friends:(id)sender {
     
-//    UIAlertView *chose_current_location = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"It looks like you don’t have permission  to view this content. Please wait for an administrator to approve your affiliation request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//    [chose_current_location show];
-    
     NSMutableArray *sharingItems = [NSMutableArray new];
-    
-    
-        [sharingItems addObject:@"Hi Friend, \n\n Please checkout our University Alumni App at: http://ixsol.at \n\n Lets get connected!"];
+    [sharingItems addObject:@"Hi Friend, \n\n Please checkout our University Alumni App at: http://ixsol.at \n\n Lets get connected!"];
     
     UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
     [self presentViewController:activityController animated:YES completion:nil];
+    
 }
-
-
-//-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSLog(@"Row: %ld",(long)indexPath.row);
-//    
-//    
-//}
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-//
-//    if ([[segue identifier] isEqualToString:@"MAP_DETAILS_SEGUE"]) {
-//        NSIndexPath *indexPath = [tableview indexPathForCell:sender];
-//        if (indexPath.row==0) {
-//            [self performSegueWithIdentifier:@"MAP_DETAILS_SEGUE" sender:self];
-//        }
-//    }
-//}
-
 
 
 @end

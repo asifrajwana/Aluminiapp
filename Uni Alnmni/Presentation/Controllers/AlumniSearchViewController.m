@@ -46,17 +46,22 @@ int selectedIndex;
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - TableView_Delegates
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
     return 1;
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
     return ListData.count;
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     static NSString *cellForIdentifier = @"CellForSearch";
     AlumniSearchCustomCellTableViewCell *cell = (AlumniSearchCustomCellTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellForIdentifier];
     if (cell == nil) {
@@ -73,9 +78,11 @@ int selectedIndex;
         
     }
     return cell;
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     self.cellSelected  = (AlumniSearchCustomCellTableViewCell *)[tableview cellForRowAtIndexPath:indexPath];
@@ -89,9 +96,13 @@ int selectedIndex;
     }else {
         [self performSegueWithIdentifier:@"SEARCH_DATA_TEXT_SEGUE" sender:self];
     }
+    
 }
 
+#pragma mark Wind_Unwind_Functions
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
     if ([segue.identifier isEqualToString:@"SEARCH_DATA_TEXT_SEGUE"]) {
         searchDataSetViewController *vc = [segue destinationViewController];
         
@@ -114,13 +125,12 @@ int selectedIndex;
         vc.is_from_search = YES;
         //vc.PFObjectList = self.PfObjectList;
     }
-    
 
 }
 
 
-- (IBAction)unwindToAlumniSearchController:(UIStoryboardSegue *)unwindSegue
-{
+- (IBAction)unwindToAlumniSearchController:(UIStoryboardSegue *)unwindSegue{
+    
     if ([unwindSegue.sourceViewController isKindOfClass:[searchDataSetViewController class]]) {
         searchDataSetViewController *SDSViewConroller = unwindSegue.sourceViewController;
         // if the user clicked Cancel, we don't want to change the color
@@ -168,6 +178,7 @@ int selectedIndex;
     
 }
 
+#pragma mark Controller_Actions
 
 - (IBAction)searchAluminiByGivenFilters:(id)sender {
     

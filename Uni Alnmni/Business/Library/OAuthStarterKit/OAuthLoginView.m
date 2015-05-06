@@ -227,7 +227,7 @@
      object:self
      userInfo:userinfo];
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];//usman
     
 }
 
@@ -237,8 +237,13 @@
 //
 - (void)initLinkedInApi
 {
-    apikey = @"75c6gdfxvh8oh4";
-    secretkey = @"J6apdtZHHWqFtUAZ";
+//    apikey = @"75c6gdfxvh8oh4";
+//    secretkey = @"J6apdtZHHWqFtUAZ";
+    
+    apikey = @"77oy3lv0iye7pi";
+    secretkey = @"ku1dg3fHWX4xiYVb";
+    
+    
 
     self.consumer = [[OAConsumer alloc] initWithKey:apikey
                                         secret:secretkey

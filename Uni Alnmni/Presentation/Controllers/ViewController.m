@@ -35,13 +35,10 @@ UIAlertView *alertToEnableDeviceLocation;
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header1"]];
-
-
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     [self.footer_view setBackgroundColor:BLUE_HEADER];
     NSString *access_token = [defaults objectForKey:@"access_token"];
@@ -49,14 +46,14 @@ UIAlertView *alertToEnableDeviceLocation;
     if (access_token) {
         [self first_Alumni_Hit];
     }
-    
-
-    
+ 
 }
 
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
 #pragma mark pragma SignIn_Into_LinkedIn_And_Getting Data
@@ -74,10 +71,11 @@ UIAlertView *alertToEnableDeviceLocation;
     [self.loader startAnimating];
     
     [self presentViewController:oAuthLoginView animated:YES completion:nil];
+    
 }
 
--(void) loginViewDidFinish:(NSNotification*)notification
-{
+-(void) loginViewDidFinish:(NSNotification*)notification{
+    
     NSDictionary *userinfo = notification.userInfo;
     if([[userinfo objectForKey:@"isLogin"] isEqualToString:@"Yes"]){
         //[self performSegueWithIdentifier:@"Homescreen" sender:self];
@@ -97,9 +95,9 @@ UIAlertView *alertToEnableDeviceLocation;
     
 }
 
-- (void)profileApiCall
-{
-        NSURL *url = [NSURL URLWithString:@"http://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,location,industry,picture-url,educations,email-address,main-address)?format=json"];
+- (void)profileApiCall{
+    
+    NSURL *url = [NSURL URLWithString:@"http://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,location,industry,picture-url,educations,email-address,main-address)?format=json"];
     OAMutableURLRequest *request =
     [[OAMutableURLRequest alloc] initWithURL:url
                                     consumer:oAuthLoginView.consumer
@@ -117,26 +115,19 @@ UIAlertView *alertToEnableDeviceLocation;
     
 }
 
-- (void)profileApiCallResult:(OAServiceTicket *)ticket didFinish:(NSData *)data
-{
-    NSError *error;
-    //NSString *responseBody = [[NSString alloc] initWithData:data
-    //                                               encoding:NSUTF8StringEncoding];
+- (void)profileApiCallResult:(OAServiceTicket *)ticket didFinish:(NSData *)data{
     
+    NSError *error;
     json = [NSJSONSerialization JSONObjectWithData:data
                                                          options:kNilOptions
                                                            error:&error];
-   
-    //NSLog(@"Profile responce: %@",responseBody);
-    
-    //NSDictionary *profile = [responseBody objectFromJSONString];
-    
         if ( json )
         {
             NSLog(@"%@",json);
             
             PFQuery *query = [PFQuery queryWithClassName:@"LinkedInUser"];
             [query whereKey:@"email" equalTo:[json objectForKey:@"emailAddress"]];
+
             [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                 
              
@@ -207,6 +198,7 @@ UIAlertView *alertToEnableDeviceLocation;
                                                      NSLog(@"Current Location:%lu",(unsigned long)placemarks.count);
                                                      if ([aPlacemark.locality isEqualToString:self.current_city]) {
                                                          self.geo_location = [PFGeoPoint geoPointWithLocation:self.location];
+                                                         [self saveLinkedInUserOnParse:json andLocationData:nil];
                                                         
                                                      }else if (placemarks.count == count){
                                                      
@@ -231,7 +223,7 @@ UIAlertView *alertToEnableDeviceLocation;
                         }
                         
                         if (self.geo_location != nil) {
-                            [self saveLinkedInUserOnParse:json andLocationData:nil];
+//                            [self saveLinkedInUserOnParse:json andLocationData:nil];
                         }
                     
                     }
@@ -386,6 +378,7 @@ UIAlertView *alertToEnableDeviceLocation;
 - (void) saveEducationsForThisUser : (PFObject *) linkedUser andEducations : (NSDictionary *) educations
 {
     NSArray *allEducations = [educations objectForKey:@"values"];
+    NSLog(@"Usman All = %lu", (unsigned long)[allEducations count]);
     
     for (NSDictionary *edu in allEducations)
     {
@@ -408,6 +401,7 @@ UIAlertView *alertToEnableDeviceLocation;
                         NSLog(@"User degree Saved");
                     }
                 }];
+                NSLog(@"User degree Saved");
             }
             else if (error)
             {
